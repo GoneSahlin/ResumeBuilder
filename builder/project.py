@@ -5,7 +5,7 @@ class Project():
         tools=None,
         date=None,
         bullets=[]
-        ):
+        ) -> None:
         self.name = name
         self.tools = tools
         self.date = date

@@ -1,11 +1,11 @@
-from contacts import Contacts
-from education import Education
-from project import Project
-from work_experience import WorkExperience
+from builder.contacts import Contacts
+from builder.education import Education
+from builder.project import Project
+from builder.work_experience import WorkExperience
 
 
 class Resume():
-    def __init__(self):
+    def __init__(self) -> None:
         self.name = ""
         self.contacts = Contacts()
         self.educations = []
@@ -15,17 +15,43 @@ class Resume():
         self.related_courseworks = []
         self.technical_skills = []
 
-    def add_education(self):
-        self.educations.append(Education())
+    def add_education(
+        self,
+        school_name=None,
+        location=None,
+        start_date=None,
+        end_date=None,
+        major=None,
+        bullets=[]
+        ) -> None:
+        self.educations.append(Education(school_name, location, start_date, end_date, major, bullets))
 
-    def add_project(self):
-        self.projects.append(Project())
+    def add_project(
+        self,
+        name=None,
+        tools=None,
+        date=None,
+        bullets=[]
+        ) -> None:
+        self.projects.append(Project(name, tools, date, bullets))
 
-    def add_research(self):
-        self.researches.append(Project())
+    def add_research(
+        self,
+        name=None,
+        tools=None,
+        date=None,
+        bullets=[]
+        ) -> None:
+        self.researches.append(Project(name, tools, date, bullets))
 
-    def add_work_experience(self):
-        self.work_experiences.append(WorkExperience())
+    def add_work_experience(self,
+        title=None,
+        employer=None,
+        start_date=None,
+        end_date=None,
+        bullets=[]
+        ) -> None:
+        self.work_experiences.append(WorkExperience(title, employer, start_date, end_date, bullets))
 
     def to_txt(self, filename):
         pass

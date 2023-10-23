@@ -6,7 +6,7 @@ class WorkExperience():
         start_date=None,
         end_date=None,
         bullets=[]
-        ):
+        ) -> None:
         self.title = title
         self.employer = employer
         self.start_date = start_date

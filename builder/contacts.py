@@ -5,7 +5,7 @@ class Contacts():
         email=None,
         github=None,
         linkedin=None
-        ):
+        ) -> None:
         self.phone = phone
         self.email = email
         self.github = github
