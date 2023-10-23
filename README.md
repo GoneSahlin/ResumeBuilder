@@ -1,3 +1,3 @@
-# PythonTemplate
+# Resume Builder
 
-A template for a new python project
+Builds a resume.
