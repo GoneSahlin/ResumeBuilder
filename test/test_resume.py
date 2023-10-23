@@ -26,6 +26,7 @@ class TestResume(unittest.TestCase):
 
         resume.add_project(
             "Machine Learning for Real Estate",
+            None,
             "Python, SQL, PyTorch, JS, Fast API",
             "Fall 2022 - Spring 2023",
             ["Senior Design Project", "Collects data on historical rental prices, crime data, and school scores.",
