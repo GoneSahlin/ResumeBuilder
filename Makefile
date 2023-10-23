@@ -12,7 +12,7 @@ run: $(VENV)
 
 .PHONY: test
 test: $(VENV)
-	$(VENV)/bin/python3 -m unittest test/test_resume.py
+	$(VENV)/bin/python3 -m unittest discover test
 
 .PHONY: lint
 lint: $(VENV)
