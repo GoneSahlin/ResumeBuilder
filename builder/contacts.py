@@ -1,6 +1,12 @@
 class Contacts():
-    def __init__(self):
-        self.phone = None
-        self.email = None
-        self.github = None
-        self.linkedin = None
+    def __init__(
+        self,
+        phone=None,
+        email=None,
+        github=None,
+        linkedin=None
+        ):
+        self.phone = phone
+        self.email = email
+        self.github = github
+        self.linkedin = linkedin
