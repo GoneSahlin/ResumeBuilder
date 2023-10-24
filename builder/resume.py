@@ -116,15 +116,62 @@ class Resume():
                 latex += project.create_latex()
 
         # research
+        if self.researches:
+            latex += "\n\\vspace*{-2mm}"
+            latex += "\n\\section{RESEARCH}"
+
+            for research in self.researches:
+                latex += research.create_latex()
 
         # work experience
+        if self.work_experiences:
+            latex += "\n\\vspace*{-2mm}"
+            latex += "\n\\section{WORK EXPERIENCE}"
 
-        # related coursework
+            for work_experience in self.work_experiences:
+                latex += work_experience.create_latex()
 
-        # technical skills
+        # related coursework and technical skills
+        if self.related_courseworks and self.technical_skills:
+            latex += "\n\\begin{multicols}{2}"
+            latex += self.create_related_courseworks_latex()
+            
+            latex += "\n\\columnbreak"
 
+            latex += self.create_technical_skills_latex()
+
+            latex += "\n\\end{multicols}"
+        elif self.related_courseworks:
+            latex += self.create_related_courseworks_latex()
+        elif self.technical_skills:
+            latex += self.create_technical_skills_latex()
+
+        # end document
+        latex += "\n\\end{document}"
 
         print(latex)
+
+
+    def create_related_courseworks_latex(self):
+        latex = "\n\\section{RELATED COURSEWORK}"
+        latex += "\n{\\begin{itemize}"
+
+        for related_coursework in self.related_courseworks:
+            latex += "\n\\item " + related_coursework
+        latex += "\n\\end{itemize}}"
+
+        return latex
+    
+    def create_technical_skills_latex(self):
+        latex = "\n\\section{TECHNICAL SKILLS}"
+        latex += "\n{\\begin{itemize}"
+
+        for technical_skill in self.technical_skills:
+            latex += "\n\\item " + technical_skill
+        latex += "\n\\end{itemize}}"
+
+        return latex
+
 
     def to_txt(self, filename):
         pass
