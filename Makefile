@@ -3,7 +3,8 @@ MODULE = builder
 
 $(VENV): setup.cfg
 	python3 -m venv $(VENV)
-	$(VENV)/bin/pip install -e $(MODULE)[dev]
+	# $(VENV)/bin/pip install -e $(MODULE)[dev]
+	$(VENV)/bin/pip install -e .
 	touch $(VENV)
 
 .PHONY: run
@@ -26,4 +27,5 @@ clean:
 	rm -rf *.eggs
 	rm -rf *.egg
 	rm -rf *.egg-info
+	rm -f lib/resume.*
 	

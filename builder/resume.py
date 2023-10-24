@@ -4,6 +4,7 @@ from string import Template
 from builder.education import Education
 from builder.project import Project
 from builder.work_experience import WorkExperience
+from builder.utils import clean_latex
 
 
 class Resume():
@@ -149,8 +150,10 @@ class Resume():
         # end document
         latex += "\n\\end{document}"
 
-        print(latex)
+        # clean latex
+        latex = clean_latex(latex)
 
+        return latex
 
     def create_related_courseworks_latex(self):
         latex = "\n\\section{RELATED COURSEWORK}"
