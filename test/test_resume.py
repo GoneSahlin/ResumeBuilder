@@ -68,6 +68,7 @@ class TestResume(unittest.TestCase):
     def test_create_latex(self):
         resume = create_my_resume()
 
-        resume.create_latex()
+        latex = resume.create_latex()
 
-    
+        assert latex
+
