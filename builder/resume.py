@@ -1,3 +1,6 @@
+import os
+from string import Template
+
 from builder.education import Education
 from builder.project import Project
 from builder.work_experience import WorkExperience
@@ -6,13 +9,15 @@ from builder.work_experience import WorkExperience
 class Resume():
     def __init__(
         self,
-        name="First Last",
+        first_name="First",
+        last_name="Last",
         phone=None,
         email=None,
         github=None,
         linkedin=None
         ) -> None:
-        self.name = name
+        self.first_name = first_name
+        self.last_name = last_name
         self.phone = phone
         self.email = email
         self.github = github
@@ -71,8 +76,55 @@ class Resume():
     def add_technical_skill(self, technical_skill):
         self.technical_skills.append(technical_skill)
 
-    def build_latex(self):
-        pass
+    def create_latex(self):
+        template_filename = os.path.join("lib", "latex_template")
+        with open(template_filename, 'r') as template:
+            latex = template.read()
+
+        # contacts
+        latex += Template("\n\\name{$first}{$last}").substitute(first=self.first_name, last=self.last_name)
+
+        if self.email:
+            latex += Template("\n\\email{$email}").substitute(email=self.email)
+
+        if self.phone:
+            latex += Template("\n\\mobile{$phone}").substitute(phone=self.phone)
+
+        if self.github:
+            latex += Template("\n\\social[github]{$github}").substitute(github=self.github)
+
+        if self.linkedin:
+            latex += Template("\n\\social[linkedin]{$linkedin}").substitute(linkedin=self.linkedin)
+
+        # start of document
+        latex += "\n\\begin{document}\n\\maketitle\n\\vspace*{-10mm}"
+
+        # education
+        if self.educations:
+            latex += "\n\\vspace*{-2mm}"
+            latex += "\n\\section{EDUCATION}"
+
+            for education in self.educations:
+                latex += education.create_latex()
+
+        # projects
+        if self.projects:
+            latex += "\n\\vspace*{-2mm}"
+            latex += "\n\\section{PROJECTS}"
+
+            for project in self.projects:
+                latex += project.create_latex()
+
+        # research
+
+        # work experience
+
+        # related coursework
+
+        # technical skills
+
+
+        print(latex)
 
     def to_txt(self, filename):
         pass

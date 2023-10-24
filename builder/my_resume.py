@@ -1,9 +1,10 @@
 from builder.resume import Resume
 
 
-def create_my_resume():
+def create_my_resume() -> Resume:
     resume = Resume(
-        "Zach Sahlin",
+        "Zach",
+        "Sahlin",
         "206-607-7655",
         "zach@sahlins.net",
         "GoneSahlin",
@@ -93,3 +94,5 @@ def create_my_resume():
 
     for technical_skill in technical_skills:
         resume.add_technical_skill(technical_skill)
+
+    return resume
