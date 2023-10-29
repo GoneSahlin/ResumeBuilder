@@ -7,9 +7,13 @@ $(VENV): setup.cfg
 	$(VENV)/bin/pip install -e .
 	touch $(VENV)
 
-.PHONY: run
-run: $(VENV)
+.PHONY: run-builder
+run-builder: $(VENV)
 	$(VENV)/bin/python3 $(MODULE)/main.py
+
+.PHONY: run-dev
+run-dev:
+	npm run dev --prefix app/resume-builder
 
 .PHONY: test
 test: $(VENV)
