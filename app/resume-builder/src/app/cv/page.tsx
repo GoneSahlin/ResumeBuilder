@@ -1,19 +1,57 @@
+"use client";
+import { useForm, SubmitHandler } from "react-hook-form"
+import { Contacts } from "../ui/contacts";
+
+export type Inputs = {
+  firstName: string
+  lastName: string
+  phone: number
+  email: string
+  github: string
+  linkedin: string
+}
+
 export default function Page() {
-  async function create(formData: FormData) {
-    'use server'
-  }
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>()
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+
+  console.log(watch("firstName")) // watch input value by passing the name of it
 
   return (
-    <form action={create}>
-      <label>
-        First Name:
-        <input name="firstName" type="text" />
-      </label>
-      <br />
-      <label>
-        Last Name:
-        <input name="lastName" type="text" />
-      </label>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <label>First Name:</label><br />
+      <input {...register("firstName", { required: true })} />
+      {errors.firstName && <span>This field is required</span>}<br />
+
+      <label>Last Name:</label><br />
+      <input {...register("lastName", { required: true })} />
+      {errors.lastName && <span>This field is required</span>}<br />
+
+      {/* <label>Phone Number:</label><br />
+      <input {...register("phone")} /><br />
+
+      <label>Email:</label><br />
+      <input {...register("email")} type="email" /><br />
+
+      <label>GitHub URL:</label><br />
+      <input {...register("github")} type="url" /><br />
+
+      <label>LinkedIn URL:</label><br />
+      <input {...register("linkedin")} type="url" /><br /> */}
+
+      {Contacts(register)}<br /><br />
+
+      <input type="submit" value="Submit" />
     </form>
-  );
+  )
 }
+
+
+
+
+
