@@ -32,19 +32,7 @@ export default function Page() {
       <input {...register("lastName", { required: true })} />
       {errors.lastName && <span>This field is required</span>}<br />
 
-      {/* <label>Phone Number:</label><br />
-      <input {...register("phone")} /><br />
-
-      <label>Email:</label><br />
-      <input {...register("email")} type="email" /><br />
-
-      <label>GitHub URL:</label><br />
-      <input {...register("github")} type="url" /><br />
-
-      <label>LinkedIn URL:</label><br />
-      <input {...register("linkedin")} type="url" /><br /> */}
-
-      {Contacts(register)}<br /><br />
+      {Contacts(register)}<br />
 
       <input type="submit" value="Submit" />
     </form>

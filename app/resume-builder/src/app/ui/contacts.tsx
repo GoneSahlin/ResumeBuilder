@@ -42,7 +42,9 @@ export function Contacts(register: UseFormRegister<Inputs>) {
   return (
     <div>
       {contactTypesUsed.map(Contact)}
-      <button onClick={handleOpen}>Add Contact</button>
+      {otherContactTypes.length > 0 ? (
+        <button onClick={handleOpen}>Add Contact</button>
+      ) : null}
       {open ? (
         <ul>
           <li>
