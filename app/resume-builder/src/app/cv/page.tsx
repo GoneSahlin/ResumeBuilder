@@ -9,18 +9,15 @@ export type Inputs = {
   email: string
   github: string
   linkedin: string
-}
+};
 
 export default function Page() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm<Inputs>()
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
-
-  console.log(watch("firstName")) // watch input value by passing the name of it
+  } = useForm<Inputs>();
+  const onSubmit = (data: any) => console.log(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -34,10 +31,10 @@ export default function Page() {
 
       {Contacts(register)}<br />
 
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Submit" /><br /><br />
     </form>
-  )
-}
+  );
+};
 
 
 

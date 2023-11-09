@@ -1,23 +1,22 @@
-import { Inputs } from "@/app/cv/page"
+// import { Inputs } from "@/app/cv/page"
 import { useState } from "react";
 import { UseFormRegister } from "react-hook-form";
-
 
 const contactTypes: { [name: string]: {[item: string]: string}} = {
   "phone": {addString: "Add Phone Number", labelString: "Phone Number:", inputType: "text"},
   "email": {addString: "Add Email", labelString: "Email:", inputType: "email"},
   "github": {addString: "Add GitHub URL", labelString: "GitHub URL:", inputType: "url"},
   "linkedin": {addString: "Add LinkedIn URL", labelString: "LinkedIn URL:", inputType: "url"}
-}
+};
 
-export function Contacts(register: UseFormRegister<Inputs>) {
-  const [otherContactTypes, setOtherContactTypes] = useState<string[]>(Object.keys(contactTypes))
+export function Contacts(register: UseFormRegister<any>) {
+  const [otherContactTypes, setOtherContactTypes] = useState<string[]>(Object.keys(contactTypes));
   const [contactTypesUsed, setContactTypesUsed] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(!open);
-  }
+  };
 
   function addContact(name: string) {
     setOpen(!open);
@@ -27,17 +26,17 @@ export function Contacts(register: UseFormRegister<Inputs>) {
     const index = otherContactTypes.indexOf(name);
     otherContactTypes.splice(index, 1);
     setOtherContactTypes(otherContactTypes);
-  }
+  };
 
   function Contact(name: string) {
     const labelString = contactTypes[name].labelString;
     return (
-      <div>
+      <div key={name}>
         <label>{labelString}</label><br />
-        <input {...register("phone")}></input>
+        <input {...register(name)}></input>
       </div>
-    )
-  }
+    );
+  };
   
   return (
     <div>
@@ -47,16 +46,14 @@ export function Contacts(register: UseFormRegister<Inputs>) {
       ) : null}
       {open ? (
         <ul>
-          <li>
-            {otherContactTypes.map((x) => {
-              const addString: string = contactTypes[x].addString;
-              return (
-                <div>
-                  <button onClick={() => addContact(x)}>{addString}</button><br />
-                </div>
-              );
-            })}
-          </li>
+          {otherContactTypes.map((x) => {
+            const addString: string = contactTypes[x].addString;
+            return (
+              <li key={x + "li"}>
+                <button onClick={() => addContact(x)}>{addString}</button><br />
+              </li>
+            );
+          })};
         </ul>
       ) : null}
     </div>
