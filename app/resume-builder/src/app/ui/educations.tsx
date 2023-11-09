@@ -1,33 +1,37 @@
 import { useState } from "react";
 import { UseFormRegister } from "react-hook-form";
+import { Bullets } from "./bullets";
 
 export function Educations(register: UseFormRegister<any>) {
   const [count, setCount] = useState(0);
+  const [bulletCounts, setBulletCounts] = useState<Array<number>>([]);
 
   function addEducation() {
     setCount(count + 1);
+    setBulletCounts([...bulletCounts, 0]);
   }
 
   function Education(i: number) {
     return (
       <div key={i}>
         <label>School Name:</label><br />
-        <input {...register("schoolName" + i)}></input><br />
+        <input {...register("educationName" + i)}></input><br />
         <label>Location:</label><br />
-        <input {...register("schoolLocation" + i)}></input><br />
+        <input {...register("educationLocation" + i)}></input><br />
         <label>Start Date:</label><br />
-        <input {...register("schoolStartDate" + i)}></input><br />
+        <input {...register("educationStartDate" + i)}></input><br />
         <label>End Date:</label><br />
-        <input {...register("schoolEndDate" + i)}></input><br />
+        <input {...register("educationEndDate" + i)}></input><br />
         <label>Major:</label><br />
-        <input {...register("schoolMajor" + i)}></input><br />
+        <input {...register("educationMajor" + i)}></input><br />
+        {Bullets(i, bulletCounts, setBulletCounts, register)}
       </div>
     );
   };
 
   const countArray = Array.from(
     {length: count},
-    (item, index) => item = index + 1
+    (item, index) => item = index
   );
   
   return (
