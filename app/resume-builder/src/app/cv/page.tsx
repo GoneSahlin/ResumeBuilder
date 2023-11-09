@@ -1,6 +1,7 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { Contacts } from "../ui/contacts";
+import { Educations } from "../ui/educations";
 
 export type Inputs = {
   firstName: string
@@ -30,6 +31,8 @@ export default function Page() {
       {errors.lastName && <span>This field is required</span>}<br />
 
       {Contacts(register)}<br />
+
+      {Educations(register)}<br />
 
       <input type="submit" value="Submit" /><br /><br />
     </form>

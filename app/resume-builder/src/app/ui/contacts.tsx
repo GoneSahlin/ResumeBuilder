@@ -42,7 +42,7 @@ export function Contacts(register: UseFormRegister<any>) {
     <div>
       {contactTypesUsed.map(Contact)}
       {otherContactTypes.length > 0 ? (
-        <button onClick={handleOpen}>Add Contact</button>
+        <button type="button" onClick={handleOpen}>Add Contact</button>
       ) : null}
       {open ? (
         <ul>
@@ -50,7 +50,7 @@ export function Contacts(register: UseFormRegister<any>) {
             const addString: string = contactTypes[x].addString;
             return (
               <li key={x + "li"}>
-                <button onClick={() => addContact(x)}>{addString}</button><br />
+                <button type="button" onClick={() => addContact(x)}>{addString}</button><br />
               </li>
             );
           })};
