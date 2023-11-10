@@ -4,6 +4,9 @@ import { Contacts } from "../ui/contacts";
 import { Educations } from "../ui/educations";
 import { Projects } from "../ui/projects";
 import { Research } from "../ui/research";
+import { WorkExperiences } from "../ui/work-experience";
+import { RelatedCoursework } from "../ui/related-coursework";
+import { TechnicalSkills } from "../ui/technical-skills";
 
 export type Inputs = {
   firstName: string
@@ -39,6 +42,12 @@ export default function Page() {
       {Projects(register)}<br />
 
       {Research(register)}<br />
+
+      {WorkExperiences(register)}<br />
+
+      {RelatedCoursework(register)}<br />
+
+      {TechnicalSkills(register)}<br />
 
       <input type="submit" value="Submit" /><br /><br />
     </form>

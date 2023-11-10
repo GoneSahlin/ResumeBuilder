@@ -8,7 +8,7 @@ export function WorkExperiences(register: UseFormRegister<any>) {
   function addWorkExperience() {
     setCount(count + 1);
   }
-  
+
   function WorkExperience(i: number) {
     return (
       <div key={i}>
@@ -34,7 +34,7 @@ export function WorkExperiences(register: UseFormRegister<any>) {
     <div>
       {[...countArray].map(WorkExperience)}
       
-      <button type="button" onClick={addWorkExperience}>Add Project</button>
+      <button type="button" onClick={addWorkExperience}>Add Work Experience</button>
     </div>
   );
 }
