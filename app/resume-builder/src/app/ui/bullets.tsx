@@ -2,10 +2,10 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 export function Bullets({
-  i,
+  id,
   register,
 }: {
-  i: number;
+  id: string;
   register: UseFormRegister<any>;
 }) {
   const [count, setCount] = useState(0);
@@ -14,10 +14,10 @@ export function Bullets({
     setCount(count + 1)
   };
 
-  function Bullet(j: number) {
+  function Bullet(i: number) {
     return (
-      <div key={j}>
-        <input {...register(i + "bullet" + j)}></input>
+      <div key={i}>
+        <input {...register(id + "bullet" + i)}></input>
       </div>
     );
   };
@@ -29,7 +29,6 @@ export function Bullets({
 
   return (
     <div>
-      {count}
       {count > 0 ? (
         <div>
           <span>Bullet Points:</span>

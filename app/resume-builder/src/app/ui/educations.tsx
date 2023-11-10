@@ -22,7 +22,7 @@ export function Educations(register: UseFormRegister<any>) {
         <input {...register("educationEndDate" + i)}></input><br />
         <label>Major:</label><br />
         <input {...register("educationMajor" + i)}></input><br />
-        <Bullets i={i} register={register} /><br />
+        <Bullets id={"education" + i} register={register} /><br />
       </div>
     );
   };
