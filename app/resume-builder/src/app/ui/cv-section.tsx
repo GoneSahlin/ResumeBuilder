@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { UseFormRegister, UseFormUnregister } from "react-hook-form";
+import { UseFormRegister } from "react-hook-form";
 import { Bullets } from "./bullets";
 import { Field } from "../lib/definitions";
 
-export function CVSection(sectionName: string, fields: Array<Field>, prefix: string, register: UseFormRegister<any>, unregister: UseFormUnregister<any>) {
+export function CVSection(sectionName: string, fields: Array<Field>, prefix: string, register: UseFormRegister<any>) {
   const [ids, setIds] = useState<Array<number>>([])
 
   function addItem() {
@@ -20,13 +20,8 @@ export function CVSection(sectionName: string, fields: Array<Field>, prefix: str
   function handleRemove(idRemoved: number) {
     setIds(
       ids.filter(id => id !== idRemoved)
-    )
-    
-    // unregister fields
-    fields.map(field => {
-      unregister(createInputName(field.name, idRemoved));
-    });
-  }
+    );    
+  };
 
   function Item(id: number) {
     return (
@@ -42,7 +37,7 @@ export function CVSection(sectionName: string, fields: Array<Field>, prefix: str
             );
           })}
         </>
-        <Bullets id={prefix + id} register={register} /><br />
+        <Bullets id={prefix + id} register={register}/><br />
       </div>
     );
   };

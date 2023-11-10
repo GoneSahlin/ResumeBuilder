@@ -21,9 +21,8 @@ export default function Page() {
   const {
     register,
     handleSubmit,
-    unregister,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({ shouldUnregister: true });
   const onSubmit = (data: any) => console.log(data);
 
   return (
@@ -37,17 +36,11 @@ export default function Page() {
       {errors.lastName && <span>This field is required</span>}<br />
 
       {Contacts(register)}<br />
-
-      {Educations(register, unregister)}<br />
-
-      {Projects(register, unregister)}<br />
-
-      {Research(register, unregister)}<br />
-
-      {WorkExperiences(register, unregister)}<br />
-
+      {Educations(register)}<br />
+      {Projects(register)}<br />
+      {Research(register)}<br />
+      {WorkExperiences(register)}<br />
       {RelatedCoursework(register)}<br />
-
       {TechnicalSkills(register)}<br />
 
       <input type="submit" value="Submit" /><br /><br />

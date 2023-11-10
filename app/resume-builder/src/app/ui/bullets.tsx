@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 export function Bullets({
@@ -8,31 +8,39 @@ export function Bullets({
   id: string;
   register: UseFormRegister<any>;
 }) {
-  const [count, setCount] = useState(0);
+  const [bulletIds, setBulletIds] = useState<Array<number>>([])
+
+  function createInputName(bulletId: number) {
+    return id + "bullet" + bulletId
+  }
 
   function addBullet() {
-    setCount(count + 1)
+    const nextId = bulletIds.length > 0 ? bulletIds[bulletIds.length - 1] + 1 : 0;
+
+    setBulletIds([...bulletIds, nextId])
   };
 
-  function Bullet(i: number) {
+  function handleRemoveClick(bulletIdRemoved: number) {
+    setBulletIds(
+      bulletIds.filter(bulletId => bulletId !== bulletIdRemoved)
+    );
+  };
+
+  function Bullet(bulletId: number) {
     return (
-      <div key={i}>
-        <input {...register(id + "bullet" + i)}></input>
+      <div key={bulletId}>
+        <input {...register(createInputName(bulletId))}></input>
+        <button type="button" onClick={() => handleRemoveClick(bulletId)}>X</button>
       </div>
     );
   };
 
-  const countArray = Array.from(
-    {length: count},
-    (item, index) => item = index
-  );
-
   return (
     <div>
-      {count > 0 ? (
+      {bulletIds.length > 0 ? (
         <div>
           <span>Bullet Points:</span>
-          {[...countArray].map(Bullet)}
+          {[...bulletIds].map(Bullet)}
         </div>
       ) : null}
       <button type="button" onClick={addBullet}>Add Bullet Point</button>

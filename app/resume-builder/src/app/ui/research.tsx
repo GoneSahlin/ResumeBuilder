@@ -1,8 +1,8 @@
-import { UseFormRegister, UseFormUnregister } from "react-hook-form";
+import { UseFormRegister } from "react-hook-form";
 import { CVSection } from "./cv-section";
 import { Field } from "../lib/definitions";
 
-export function Research(register: UseFormRegister<any>, unregister: UseFormUnregister<any>) {
+export function Research(register: UseFormRegister<any>) {
   const fields: Array<Field> = [
     {name: "Title", label: "Research Title:"},
     {name: "Tools", label: "Tools:"},
@@ -12,7 +12,7 @@ export function Research(register: UseFormRegister<any>, unregister: UseFormUnre
 
   return (
     <>
-      {CVSection("Research", fields, "research", register, unregister)}
+      {CVSection("Research", fields, "research", register)}
     </>
   );
 };

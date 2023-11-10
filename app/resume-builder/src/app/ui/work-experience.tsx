@@ -1,8 +1,8 @@
-import { UseFormRegister, UseFormUnregister } from "react-hook-form";
+import { UseFormRegister } from "react-hook-form";
 import { CVSection } from "./cv-section";
 import { Field } from "../lib/definitions";
 
-export function WorkExperiences(register: UseFormRegister<any>, unregister: UseFormUnregister<any>) {
+export function WorkExperiences(register: UseFormRegister<any>) {
   const fields: Array<Field> = [
     {name: "Title", label: "School Name:"},
     {name: "Employer", label: "Employer:"},
@@ -12,7 +12,7 @@ export function WorkExperiences(register: UseFormRegister<any>, unregister: UseF
 
   return (
     <>
-      {CVSection("Work Experience", fields, "workExperience", register, unregister)}
+      {CVSection("Work Experience", fields, "workExperience", register)}
     </>
   );
 };
