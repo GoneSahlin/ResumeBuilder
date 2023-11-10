@@ -3,7 +3,7 @@ import { UseFormRegister, UseFormUnregister } from "react-hook-form";
 import { Bullets } from "./bullets";
 import { Field } from "../lib/definitions";
 
-export function CVSection(sectionName: string, fields: Array<Field>, register: UseFormRegister<any>, unregister: UseFormUnregister<any>) {
+export function CVSection(sectionName: string, fields: Array<Field>, prefix: string, register: UseFormRegister<any>, unregister: UseFormUnregister<any>) {
   const [ids, setIds] = useState<Array<number>>([])
 
   function addItem() {
@@ -14,7 +14,7 @@ export function CVSection(sectionName: string, fields: Array<Field>, register: U
 
   function createInputName (name: string, id: number) {
     // formats input name to camelCase
-    return name + id;
+    return prefix + name + id;
   }
 
   function handleRemove(idRemoved: number) {
@@ -42,7 +42,7 @@ export function CVSection(sectionName: string, fields: Array<Field>, register: U
             );
           })}
         </>
-        <Bullets id={sectionName + id} register={register} /><br />
+        <Bullets id={prefix + id} register={register} /><br />
       </div>
     );
   };

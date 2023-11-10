@@ -40,11 +40,11 @@ export default function Page() {
 
       {Educations(register, unregister)}<br />
 
-      {Projects(register)}<br />
+      {Projects(register, unregister)}<br />
 
-      {Research(register)}<br />
+      {Research(register, unregister)}<br />
 
-      {WorkExperiences(register)}<br />
+      {WorkExperiences(register, unregister)}<br />
 
       {RelatedCoursework(register)}<br />
 

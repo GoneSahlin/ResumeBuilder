@@ -1,40 +1,18 @@
-import { useState } from "react";
-import { UseFormRegister } from "react-hook-form";
-import { Bullets } from "./bullets";
+import { UseFormRegister, UseFormUnregister } from "react-hook-form";
+import { CVSection } from "./cv-section";
+import { Field } from "../lib/definitions";
 
-export function Research(register: UseFormRegister<any>) {
-  const [count, setCount] = useState(0);
+export function Research(register: UseFormRegister<any>, unregister: UseFormUnregister<any>) {
+  const fields: Array<Field> = [
+    {name: "Title", label: "Research Title:"},
+    {name: "Tools", label: "Tools:"},
+    {name: "Date", label: "Date:"},
+    {name: "Url", label: "Url:"},
+  ];
 
-  function addResearch() {
-    setCount(count + 1);
-  }
-
-  function Research(i: number) {
-    return (
-      <div key={i}>
-        <label>Research Title:</label><br />
-        <input {...register("researchTitle" + i)}></input><br />
-        <label>Tools:</label><br />
-        <input {...register("researchTools" + i)}></input><br />
-        <label>Date:</label><br />
-        <input {...register("researchDate" + i)}></input><br />
-        <label>Url:</label><br />
-        <input {...register("researchUrl" + i)}></input><br />
-        <Bullets id={"research" + i} register={register} /><br />
-      </div>
-    );
-  };
-
-  const countArray = Array.from(
-    {length: count},
-    (item, index) => item = index
-  );
-  
   return (
-    <div>
-      {[...countArray].map(Research)}
-      
-      <button type="button" onClick={addResearch}>Add Research</button>
-    </div>
+    <>
+      {CVSection("Research", fields, "research", register, unregister)}
+    </>
   );
-}
+};
