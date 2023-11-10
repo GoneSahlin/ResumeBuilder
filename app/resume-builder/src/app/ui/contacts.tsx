@@ -23,16 +23,24 @@ export function Contacts(register: UseFormRegister<any>) {
     setContactTypesUsed([...contactTypesUsed, name]);
 
     // remove item from otherContactTypes
-    const index = otherContactTypes.indexOf(name);
-    otherContactTypes.splice(index, 1);
-    setOtherContactTypes(otherContactTypes);
+    setOtherContactTypes(
+      otherContactTypes.filter(type => type !== name)
+    )
   };
+
+  function handleRemove(name: string) {
+    setContactTypesUsed(
+      contactTypesUsed.filter(type => type !== name)
+    )
+
+    setOtherContactTypes([...otherContactTypes, name])
+  }
 
   function Contact(name: string) {
     const labelString = contactTypes[name].labelString;
     return (
       <div key={name}>
-        <label>{labelString}</label><br />
+        <label>{labelString}</label><button type="button" onClick={() => handleRemove(name)}>X</button><br />
         <input {...register(name)}></input>
       </div>
     );
