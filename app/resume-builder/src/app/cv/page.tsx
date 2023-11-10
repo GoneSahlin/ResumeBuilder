@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { Contacts } from "../ui/contacts";
 import { Educations } from "../ui/educations";
 import { Projects } from "../ui/projects";
+import { Research } from "../ui/research";
 
 export type Inputs = {
   firstName: string
@@ -36,6 +37,8 @@ export default function Page() {
       {Educations(register)}<br />
 
       {Projects(register)}<br />
+
+      {Research(register)}<br />
 
       <input type="submit" value="Submit" /><br /><br />
     </form>
