@@ -34,7 +34,7 @@ export function Contacts(register: UseFormRegister<any>) {
     )
 
     setOtherContactTypes([...otherContactTypes, name])
-  }
+  };
 
   function Contact(name: string) {
     const labelString = contactTypes[name].labelString;
@@ -61,7 +61,7 @@ export function Contacts(register: UseFormRegister<any>) {
                 <button type="button" onClick={() => addContact(x)}>{addString}</button><br />
               </li>
             );
-          })};
+          })}
         </ul>
       ) : null}
     </div>
