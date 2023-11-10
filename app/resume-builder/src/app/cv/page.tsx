@@ -21,6 +21,7 @@ export default function Page() {
   const {
     register,
     handleSubmit,
+    unregister,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit = (data: any) => console.log(data);
@@ -37,7 +38,7 @@ export default function Page() {
 
       {Contacts(register)}<br />
 
-      {Educations(register)}<br />
+      {Educations(register, unregister)}<br />
 
       {Projects(register)}<br />
 
