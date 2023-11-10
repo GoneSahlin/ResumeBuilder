@@ -1,11 +1,18 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 
-export function Bullets(i: number, bulletCounts: Array<number>, setBulletCounts: Dispatch<SetStateAction<any[]>>, register: UseFormRegister<any>) {
-  
+// export function Bullets(i: number, bulletCounts: Array<number>, setBulletCounts: Dispatch<SetStateAction<any[]>>, register: UseFormRegister<any>) {
+export function Bullets({
+  i,
+  register,
+}: {
+  i: number;
+  register: UseFormRegister<any>;
+}) {
+  const [count, setCount] = useState(0);
+
   function addBullet() {
-    bulletCounts[i]++;
-    setBulletCounts(bulletCounts);
+    setCount(count + 1)
   };
 
   function Bullet(j: number) {
@@ -16,14 +23,21 @@ export function Bullets(i: number, bulletCounts: Array<number>, setBulletCounts:
     );
   };
 
-  // const countArray = Array.from(
-  //   {length: bulletCount},
-  //   (item, index) => item = index + 1
-  // );
+  const countArray = Array.from(
+    {length: count},
+    (item, index) => item = index
+  );
+
 
   return (
     <div>
-      Bullet Points:
+      {count}
+      {count > 0 ? (
+        <div>
+          <span>Bullet Points:</span>
+          {[...countArray].map(Bullet)}
+        </div>
+      ) : null}
       {/* {[...countArray].map(Bullet)} */}
       <button type="button" onClick={addBullet}>Add Bullet Point</button>
     </div>

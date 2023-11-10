@@ -4,11 +4,9 @@ import { Bullets } from "./bullets";
 
 export function Educations(register: UseFormRegister<any>) {
   const [count, setCount] = useState(0);
-  const [bulletCounts, setBulletCounts] = useState<Array<number>>([]);
 
   function addEducation() {
     setCount(count + 1);
-    setBulletCounts([...bulletCounts, 0]);
   }
 
   function Education(i: number) {
@@ -24,7 +22,7 @@ export function Educations(register: UseFormRegister<any>) {
         <input {...register("educationEndDate" + i)}></input><br />
         <label>Major:</label><br />
         <input {...register("educationMajor" + i)}></input><br />
-        {Bullets(i, bulletCounts, setBulletCounts, register)}
+        <Bullets i={i} register={register} />
       </div>
     );
   };
