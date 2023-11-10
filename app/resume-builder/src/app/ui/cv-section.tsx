@@ -13,7 +13,6 @@ export function CVSection(sectionName: string, fields: Array<Field>, prefix: str
   }
 
   function createInputName (name: string, id: number) {
-    // formats input name to camelCase
     return prefix + name + id;
   }
 

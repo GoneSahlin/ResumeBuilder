@@ -1,5 +1,5 @@
 "use client";
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { Contacts } from "../ui/contacts";
 import { Educations } from "../ui/educations";
 import { Projects } from "../ui/projects";
