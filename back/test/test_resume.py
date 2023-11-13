@@ -71,4 +71,3 @@ class TestResume(unittest.TestCase):
         latex = resume.create_latex()
 
         assert latex
-
