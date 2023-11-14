@@ -1,0 +1,31 @@
+\documentclass[11pt, a4paper, roman]{moderncv}
+
+\moderncvtheme[blue]{banking}
+\nopagenumbers
+\usepackage[utf8]{inputenc}
+\usepackage[scale=0.9]{geometry}
+\usepackage{multicol}
+
+\newcommand{\project}[5]{
+	\textbf{#1}\ifx&#2&{}
+	\else
+    		\href{#2}{\:\small\faGithub\:}\fi$|$ #3
+	\hfill\textit{#4}
+	#5
+	\vspace{2mm}
+}
+
+\newcommand{\entry}[4]{
+	\textbf{#2}\:$|$\:#1 
+	\hfill\textit{#3}
+	#4
+	\vspace{2mm}
+}
+
+\newcommand{\education}[5]{
+	\textbf{#1} $|$ #2
+	\hfill#3
+	\\\textit{#4}
+	#5
+	\vspace{2mm}
+}
