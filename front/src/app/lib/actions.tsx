@@ -11,7 +11,8 @@ const example = {
   "phone": "2066077655",
   "github": "GoneSahlin",
   "education0bullet0": "bullet1",
-  "education0bullet1": "bullet2",
+  "education0bullet1": "",
+  "education0bullet2": "bullet2",
   "projectTitle0": "Machine Learning for Real Estate",
   "projectTools0": "Python",
   "projectDate0": "Fall 2022 - Spring 2023",
@@ -24,12 +25,28 @@ const example = {
   "researchTitle1": 'Long Span Truss Analysis and Optimization',
   "researchTools1": '',
   "researchDate1": '',
-  "researchUrl1": ''
+  "researchUrl1": '',
+  "relatedCourseworkbullet0": 'NLP',
+  "relatedCourseworkbullet2": 'Linux & DevOps',
 }
 
 export async function cleanData(data: any) {
-  console.log(data);
-  data = example;
+  // data = example;
+
+  function cleanBullets(bulletPrefix) {
+      const bulletIds = keys.filter((key) => key.slice(0, bulletPrefix.length) === bulletPrefix);
+      
+      const bullets: Array<string> = [];
+      for (let j = 0; j < bulletIds.length; j++) {
+        const bullet = data[bulletIds[j]];
+
+        if (bullet !== "") {
+          bullets.push(data[bulletIds[j]]);
+        }
+      }
+
+      return bullets;
+  }
 
   function cleanSection(labels: Array<string>, bulletPrefix: string) {
     // find ids
@@ -47,13 +64,7 @@ export async function cleanData(data: any) {
       }
 
       const combinedPrefix = bulletPrefix + id;
-      const bulletIds = keys.filter((key) => key.slice(0, combinedPrefix.length) === combinedPrefix);
-      
-      const bullets: Array<string> = [];
-      for (let j = 0; j < bulletIds.length; j++) {
-        bullets.push(data[bulletIds[j]]);
-      }
-
+      const bullets = cleanBullets(combinedPrefix);
       item["bullets"] = bullets;
       
       section.push(item);
@@ -82,10 +93,10 @@ export async function cleanData(data: any) {
   const projects = cleanSection(projectLabels, "project");
 
   const researchLabels: Array<string> = [
-    "researchTitle1",
-    "researchTools1",
-    "researchDate1",
-    "researchUrl1",
+    "researchTitle",
+    "researchTools",
+    "researchDate",
+    "researchUrl",
   ];
   const research = cleanSection(researchLabels, "research");
 
@@ -119,9 +130,19 @@ export async function cleanData(data: any) {
     }
   }
 
-  
+  // clean related coursework
+  const relatedCourseworkBullets = cleanBullets("relatedCoursework");
+  cleaned["relatedCoursework"] = relatedCourseworkBullets;
+
+  // clean technical skills
+  const technicalSkillsBullets = cleanBullets("technicalSkills");
+  cleaned["technicalSkills"] = technicalSkillsBullets;
+
+  // clean required labels
+  const requiredLabels = ["firstName", "lastName"];
+  requiredLabels.map((label) => {cleaned[label] = data[label]})
 
   console.log(cleaned);
 
-  return {}
+  return cleaned;
 }
