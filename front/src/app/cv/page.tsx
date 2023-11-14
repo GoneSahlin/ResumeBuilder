@@ -1,4 +1,5 @@
 "use client";
+
 import { useForm } from "react-hook-form"
 import { Contacts } from "../ui/contacts";
 import { Educations } from "../ui/educations";
@@ -7,6 +8,7 @@ import { Research } from "../ui/research";
 import { WorkExperiences } from "../ui/work-experience";
 import { RelatedCoursework } from "../ui/related-coursework";
 import { TechnicalSkills } from "../ui/technical-skills";
+import { cleanData } from "../lib/actions";
 
 export type Inputs = {
   firstName: string
@@ -23,7 +25,7 @@ export default function Page() {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ shouldUnregister: true });
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => cleanData(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

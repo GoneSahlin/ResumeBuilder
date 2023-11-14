@@ -5,8 +5,8 @@ import { UseFormRegister } from "react-hook-form";
 const contactTypes: { [name: string]: {[item: string]: string}} = {
   "phone": {addString: "Add Phone Number", labelString: "Phone Number:", inputType: "text"},
   "email": {addString: "Add Email", labelString: "Email:", inputType: "email"},
-  "github": {addString: "Add GitHub URL", labelString: "GitHub URL:", inputType: "url"},
-  "linkedin": {addString: "Add LinkedIn URL", labelString: "LinkedIn URL:", inputType: "url"}
+  "github": {addString: "Add GitHub Profile", labelString: "GitHub Profile:", inputType: "url"},
+  "linkedin": {addString: "Add LinkedIn Profile", labelString: "LinkedIn Profile:", inputType: "url"}
 };
 
 export function Contacts(register: UseFormRegister<any>) {

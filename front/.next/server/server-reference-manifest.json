@@ -1,5 +1,14 @@
 {
-  "node": {},
+  "node": {
+    "3c41e88804c92b33f0a6e5c7639114cfb0e32333": {
+      "workers": {
+        "app/cv/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fzach%2FProjects%2FResumeBuilder%2Ffront%2Fsrc%2Fapp%2Flib%2Factions.tsx%22%2C%5B%22cleanData%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/cv/page": "action-browser"
+      }
+    }
+  },
   "edge": {},
-  "encryptionKey": "xwDCTooZVfokpNblgQJEK8VsZEm4qtpdm8TVEho9TYg="
+  "encryptionKey": "A0XT4Cqc75ad7gZc3OVCgWwsxU10aC0Gi6KFOmTdYEU="
 }

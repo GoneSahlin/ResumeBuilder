@@ -4,10 +4,10 @@ import { Field } from "../lib/definitions";
 
 export function Projects(register: UseFormRegister<any>) {
   const fields: Array<Field> = [
-    {name: "projectTitle", label: "Project Title:"},
-    {name: "projectTools", label: "Tools:"},
-    {name: "projectDate", label: "Date:"},
-    {name: "projectUrl", label: "Url:"},
+    {name: "Title", label: "Project Title:"},
+    {name: "Tools", label: "Tools:"},
+    {name: "Date", label: "Date:"},
+    {name: "Url", label: "Url:"},
   ];
   
   return (

@@ -4,7 +4,7 @@ import { Field } from "../lib/definitions";
 
 export function WorkExperiences(register: UseFormRegister<any>) {
   const fields: Array<Field> = [
-    {name: "Title", label: "School Name:"},
+    {name: "Title", label: "Title:"},
     {name: "Employer", label: "Employer:"},
     {name: "StartDate", label: "Start Date:"},
     {name: "EndDate", label: "End Date:"},
