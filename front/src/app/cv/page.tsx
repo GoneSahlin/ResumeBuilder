@@ -8,7 +8,7 @@ import { Research } from "../ui/research";
 import { WorkExperiences } from "../ui/work-experience";
 import { RelatedCoursework } from "../ui/related-coursework";
 import { TechnicalSkills } from "../ui/technical-skills";
-import { cleanData } from "../lib/actions";
+import { cleanData } from "../lib/actions/clean-data";
 
 export type Inputs = {
   firstName: string
