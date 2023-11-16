@@ -41,7 +41,7 @@ export function CVSection(sectionName: string, fields: Array<Field>, prefix: str
             );
           })}
         </>
-        <Bullets id={prefix + id} register={register}/><br />
+        <Bullets id={prefix + id} register={register} defaultValues={section[id]["bullets"]} /><br />
       </div>
     );
   };

@@ -4,11 +4,17 @@ import { UseFormRegister } from "react-hook-form";
 export function Bullets({
   id,
   register,
+  defaultValues,
 }: {
   id: string;
   register: UseFormRegister<any>;
+  defaultValues: Array<string>;
 }) {
-  const [bulletIds, setBulletIds] = useState<Array<number>>([])
+  const initialIds: Array<number> = []
+  for (let i = 0; i < defaultValues.length; i++) {
+    initialIds.push(i);
+  }
+  const [bulletIds, setBulletIds] = useState<Array<number>>(initialIds);
 
   function createInputName(bulletId: number) {
     return id + "bullet" + bulletId
@@ -29,7 +35,7 @@ export function Bullets({
   function Bullet(bulletId: number) {
     return (
       <div key={bulletId}>
-        <input {...register(createInputName(bulletId))}></input>
+        <input defaultValue={defaultValues[bulletId]}{...register(createInputName(bulletId))}></input>
         <button type="button" onClick={() => handleRemoveClick(bulletId)}>X</button>
       </div>
     );
