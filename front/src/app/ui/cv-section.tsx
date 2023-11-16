@@ -3,8 +3,13 @@ import { UseFormRegister } from "react-hook-form";
 import { Bullets } from "./bullets";
 import { Field } from "../lib/definitions";
 
-export function CVSection(sectionName: string, fields: Array<Field>, prefix: string, register: UseFormRegister<any>) {
-  const [ids, setIds] = useState<Array<number>>([])
+export function CVSection(sectionName: string, fields: Array<Field>, prefix: string, register: UseFormRegister<any>, section: Array<any>) {
+  const initialIds: Array<number> = [];
+  for (let i = 0; i < section.length; i++) {
+    initialIds.push(i);
+  }
+  
+  const [ids, setIds] = useState<Array<number>>(initialIds);
 
   function addItem() {
     const nextId = ids.length > 0 ? ids[ids.length - 1] + 1 : 0;
@@ -31,7 +36,7 @@ export function CVSection(sectionName: string, fields: Array<Field>, prefix: str
             return (
               <div key={field.name}>
                 <label>{field.label}</label><br />
-                <input {...register(createInputName(field.name, id))}></input><br />
+                <input defaultValue={section[id][prefix + field.name]} {...register(createInputName(field.name, id))}></input><br />
               </div>
             );
           })}

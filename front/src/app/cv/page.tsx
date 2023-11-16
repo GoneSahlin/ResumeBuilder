@@ -1,11 +1,11 @@
 import { fetchCV } from "../api/fetch-cv";
-import clientPromise from "../api/mongodb";
 import { CVForm } from "../ui/cv-form";
-
+import { Document } from "mongodb";
 
 export default async function Page() {
   const cv = await fetchCV();
 
+  // console.log(cv)
 
   return (
     <div>

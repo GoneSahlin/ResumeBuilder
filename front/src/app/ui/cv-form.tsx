@@ -20,6 +20,7 @@ export type Inputs = {
 };
 
 export function CVForm(props: any) {
+// export function CVForm(cv: any) {
   const cv = props.cv;
 
   const {
@@ -42,12 +43,13 @@ export function CVForm(props: any) {
       <br />
 
       <Contacts register={register} cv={cv} /><br />
-      {Educations(register)}<br />
-      {Projects(register)}<br />
+      <Educations register={register} cv={cv} /><br />
+      {/* {Educations(register, cv)}<br /> */}
+      {/* {Projects(register)}<br />
       {Research(register)}<br />
-      {WorkExperiences(register)}<br />
-      {RelatedCoursework(register)}<br />
-      {TechnicalSkills(register)}<br />
+      {WorkExperiences(register)}<br /> */}
+      {/* {RelatedCoursework(register)}<br />
+      {TechnicalSkills(register)}<br /> */}
 
       <input type="submit" value="Submit" /><br /><br />
     </form>

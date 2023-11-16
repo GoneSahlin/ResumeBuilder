@@ -13,8 +13,26 @@ export async function fetchCV() {
   const db = client.db("resume_builder");
   const cvs = db.collection("cvs");
 
+  // fetch
   const filter = {"userId": userId};
-  const cv = cvs.findOne(filter);
+  const doc = await cvs.findOne(filter);
+
+  if (!doc) {
+    return {}
+  }
+
+  // format cv
+  const cv: any = {};
+
+  const string_fields: Array<string> = ["firstName", "lastName", "phone", "email", "github", "linkedin"];
+  string_fields.map((field) => {
+    cv[field] = doc[field] ? doc[field] : "";
+  });
+
+  const array_fields: Array<string> = ["educations", "projects", "research", "workExperience", "relatedCoursework", "technicalSkills"];
+  array_fields.map((field) => {
+    cv[field] = doc[field] ? doc[field] : [];
+  });
 
   return cv;
 }

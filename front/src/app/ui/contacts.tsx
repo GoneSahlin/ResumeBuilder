@@ -41,7 +41,7 @@ export function Contacts(props: any) {
 
   // activate initial contacts from cv
   otherContactTypes.map((type) => {
-    if (type in cv) {
+    if (type in cv && cv[type]) {
       addContact(type);
     }
   });
