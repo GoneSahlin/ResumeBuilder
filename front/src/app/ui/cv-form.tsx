@@ -19,27 +19,29 @@ export type Inputs = {
   linkedin: string
 };
 
-export function CVForm() {
+export function CVForm(props: any) {
+  const cv = props.cv;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ shouldUnregister: true });
-  
-  const userId = "testId";
   const onSubmit = async (data: any) => storeCV(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <label>First Name:</label><br />
-      <input {...register("firstName", { required: true })} />
+      <input defaultValue={cv["firstName"]} {...register("firstName", { required: true })} />
       {errors.firstName && <span>This field is required</span>}<br />
 
       <label>Last Name:</label><br />
-      <input {...register("lastName", { required: true })} />
+      <input defaultValue={cv["lastName"]} {...register("lastName", { required: true })} />
       {errors.lastName && <span>This field is required</span>}<br />
 
-      {Contacts(register)}<br />
+      <br />
+
+      <Contacts register={register} cv={cv} /><br />
       {Educations(register)}<br />
       {Projects(register)}<br />
       {Research(register)}<br />

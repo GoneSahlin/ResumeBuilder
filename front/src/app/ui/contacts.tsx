@@ -9,7 +9,10 @@ const contactTypes: { [name: string]: {[item: string]: string}} = {
   "linkedin": {addString: "Add LinkedIn Profile", labelString: "LinkedIn Profile:", inputType: "url"}
 };
 
-export function Contacts(register: UseFormRegister<any>) {
+export function Contacts(props: any) {
+  const register: UseFormRegister<any> = props.register;
+  const cv: any = props.cv;
+
   const [otherContactTypes, setOtherContactTypes] = useState<string[]>(Object.keys(contactTypes));
   const [contactTypesUsed, setContactTypesUsed] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
@@ -36,12 +39,19 @@ export function Contacts(register: UseFormRegister<any>) {
     setOtherContactTypes([...otherContactTypes, name])
   };
 
+  // activate initial contacts from cv
+  otherContactTypes.map((type) => {
+    if (type in cv) {
+      addContact(type);
+    }
+  });
+
   function Contact(name: string) {
     const labelString = contactTypes[name].labelString;
     return (
       <div key={name}>
         <label>{labelString}</label><button type="button" onClick={() => handleRemove(name)}>X</button><br />
-        <input {...register(name)}></input>
+        <input defaultValue={cv[name]}{...register(name)}></input>
       </div>
     );
   };
