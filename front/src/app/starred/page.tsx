@@ -49,14 +49,16 @@ async function DisplayUser() {
   );
 }
 
-export default function Page() {
+export default async function Page() {
   return (
     <div>
-      {/* <Suspense fallback={<span>Checking connection...</span>}>
-        {CheckConnection()}
-      </Suspense> */}
+      <Suspense fallback={<span>Checking connection...</span>}>
+        {/* @ts-expect-error Server Component */}
+        <CheckConnection />
+      </Suspense>
       <Suspense fallback={<span>Checking login...</span>}>
-        {DisplayUser()}
+        {/* @ts-expect-error Server Component */}
+        <DisplayUser />
       </Suspense>
     </div>
   )
