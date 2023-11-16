@@ -10,11 +10,13 @@
     "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.27.1",
     "@emotion/cache": "latest",
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
+    "mongodb": "^6.2.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
