@@ -21,6 +21,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import ArticleIcon from '@mui/icons-material/Article';
 import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
 import { ClerkProvider } from '@clerk/nextjs';
+import { UserButton } from '@clerk/nextjs';
 
 export const metadata = {
   title: 'Next.js App Router + Material UI v5',
@@ -86,6 +87,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </List>
               <Divider sx={{ mt: 'auto' }} />
               <List>
+                <ListItem>
+                  <UserButton />
+                </ListItem>
                 {PLACEHOLDER_LINKS.map(({ text, icon: Icon }) => (
                   <ListItem key={text} disablePadding>
                     <ListItemButton>

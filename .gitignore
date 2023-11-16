@@ -1,6 +1,7 @@
 *node_modules
 front/.env.local
 front/.env
+front/.next
 
 
 # Byte-compiled / optimized / DLL files

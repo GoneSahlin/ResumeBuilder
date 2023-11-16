@@ -8,14 +8,6 @@
         "app/starred/page": "rsc"
       }
     },
-    "26e74d2d941a7c62a7b1676fa474cb3720e3252b": {
-      "workers": {
-        "app/starred/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fzach%2FProjects%2FResumeBuilder%2Ffront%2Fsrc%2Fapp%2Fapi%2Fmongodb.ts%22%2C%5B%22default%22%5D%5D%5D&__client_imported__=!"
-      },
-      "layer": {
-        "app/starred/page": "rsc"
-      }
-    },
     "6ff7964fd56bd7c54cb73d380a766580fffb7a57": {
       "workers": {
         "app/cv/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fzach%2FProjects%2FResumeBuilder%2Ffront%2Fsrc%2Fapp%2Flib%2Factions%2Fclean-data.tsx%22%2C%5B%22cleanData%22%5D%5D%5D&__client_imported__=true!"
@@ -26,5 +18,5 @@
     }
   },
   "edge": {},
-  "encryptionKey": "2sfzfWcP87zOmKschCz2JsTBePZT+nnJNHx7+hK4T+M="
+  "encryptionKey": "6ve+un0rdCkNlY886M89lfVdATpwXR92dRyYW/G0JvI="
 }

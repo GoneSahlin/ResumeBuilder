@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 // import Typography from '@mui/material/Typography';
 
 import clientPromise from '../api/mongodb';
+import { currentUser } from '@clerk/nextjs';
 
 async function CheckConnection() {
   let isConnected: boolean = false;
@@ -31,11 +32,31 @@ async function CheckConnection() {
   )
 }
 
+async function DisplayUser() {
+  const user = await currentUser();
+
+  return (
+  <div>
+    {user ? (
+      <>
+        <span>First Name: {user.firstName}</span><br />
+        <span>Last Name: {user.lastName}</span>
+      </>
+    ) : (
+      <span>You are not signed in</span>
+    )}
+  </div>
+  );
+}
+
 export default function Page() {
   return (
     <div>
-      <Suspense fallback={<span>Checking connection...</span>}>
+      {/* <Suspense fallback={<span>Checking connection...</span>}>
         {CheckConnection()}
+      </Suspense> */}
+      <Suspense fallback={<span>Checking login...</span>}>
+        {DisplayUser()}
       </Suspense>
     </div>
   )
