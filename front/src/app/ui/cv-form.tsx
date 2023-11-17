@@ -44,12 +44,17 @@ export function CVForm(props: any) {
 
       <Contacts register={register} cv={cv} /><br />
       <Educations register={register} cv={cv} /><br />
+      <Projects register={register} cv={cv} /><br />
+      <Research register={register} cv={cv} /><br />
+      <WorkExperiences register={register} cv={cv} /><br />
       {/* {Educations(register, cv)}<br /> */}
       {/* {Projects(register)}<br />
       {Research(register)}<br />
       {WorkExperiences(register)}<br /> */}
       {/* {RelatedCoursework(register)}<br />
       {TechnicalSkills(register)}<br /> */}
+
+
 
       <input type="submit" value="Submit" /><br /><br />
     </form>
