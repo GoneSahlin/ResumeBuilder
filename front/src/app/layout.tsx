@@ -19,6 +19,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import SupportIcon from '@mui/icons-material/Support';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArticleIcon from '@mui/icons-material/Article';
+import { Description } from '@mui/icons-material';
 import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
 import { ClerkProvider } from '@clerk/nextjs';
 import { UserButton } from '@clerk/nextjs';
@@ -34,7 +35,8 @@ const LINKS = [
   { text: 'Home', href: '/', icon: HomeIcon },
   { text: 'Starred', href: '/starred', icon: StarIcon },
   { text: 'Tasks', href: '/tasks', icon: ChecklistIcon },
-  { text: 'CV', href: '/cv', icon: ArticleIcon}
+  { text: 'CV', href: '/cv', icon: Description},
+  { text: 'Resume', href: '/resume', icon: ArticleIcon}
 ];
 
 const PLACEHOLDER_LINKS = [
