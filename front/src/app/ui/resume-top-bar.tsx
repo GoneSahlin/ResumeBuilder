@@ -8,20 +8,34 @@ export default function ResumeTopBar({
   resumes,
   setResumes,
   setAddResumeActive,
+  activeResume,
+  setActiveResume,
 }:{
   resumes: Array<any>,
   setResumes: Dispatch<SetStateAction<any[]>>,
   setAddResumeActive: Dispatch<SetStateAction<boolean>>,
+  activeResume: number,
+  setActiveResume: Dispatch<SetStateAction<number>>,
 }) {
 
-  const resumeNames: Array<string> = resumes.map((resume: any) => {return resume.resumeName});
+  const handleResumeButton = (i: number) => {
+    setActiveResume(i);
+  }
+
+  const indexes: Array<number> = Array.from({length: resumes.length}, (item, index) => index);
 
   return (
     <Box>
       <ButtonGroup>
-        {resumeNames.map((resumeName) => {
+        {indexes.map((i) => {
           return (
-            <Button key={resumeName}>{resumeName}</Button>
+            <Button 
+              key={resumes[i].resumeName}
+              onClick={() => handleResumeButton(i)}
+              variant={i === activeResume ? "contained" : "outlined"}
+            >
+              {resumes[i].resumeName}
+            </Button>
           );
         })}
       </ButtonGroup>

@@ -6,6 +6,7 @@ import { NewResumeForm } from "./new-resume-form";
 
 export default function Resumes({initialResumes} : {initialResumes: Array<any>}) {
   const [resumes, setResumes] = useState<Array<any>>([...initialResumes]);
+  const [activeResume, setActiveResume] = useState<number>(0);
   const [addResumeActive, setAddResumeActive] = useState(false);
 
   return (
@@ -14,11 +15,16 @@ export default function Resumes({initialResumes} : {initialResumes: Array<any>})
         <NewResumeForm resumes={resumes} setResumes={setResumes} setAddResumeActive={setAddResumeActive} />
       ):(
         <div>
-          <ResumeTopBar resumes={resumes} setResumes={setResumes} setAddResumeActive={setAddResumeActive} />
+          <ResumeTopBar 
+            resumes={resumes} 
+            setResumes={setResumes} 
+            setAddResumeActive={setAddResumeActive}
+            activeResume={activeResume} 
+            setActiveResume={setActiveResume} 
+          />
           Resumes
         </div> 
       )}
     </>
   )
-
 }
