@@ -29,10 +29,22 @@ export function NewResumeForm({
     setAddResumeActive(false);
   };
 
+  const defaultResumeName = () => {
+    let i = resumes.length + 1
+    let name = "Resume " + i;
+    const resumeNames = resumes.map((resume) => {return resume.resumeName})
+
+    while (resumeNames.includes(name)) {
+      name = "Resume " + ++i
+    }
+
+    return name;
+  }
+
   return (
     <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField label="Resume Name" defaultValue={"Resume " + (resumes.length + 1)}{...register("resumeName")} /><br />
+        <TextField label="Resume Name" defaultValue={defaultResumeName()}{...register("resumeName")} /><br />
 
         <Button type="submit">Add Resume</Button>
       </form>
