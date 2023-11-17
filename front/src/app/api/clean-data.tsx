@@ -1,5 +1,6 @@
 "use server";
 
+// used for testing
 const example = {
   "firstName": "Zach",
   "lastName": "Sahlin",
@@ -31,8 +32,6 @@ const example = {
 }
 
 export async function cleanData(data: any) {
-  data = example;
-
   function cleanBullets(bulletPrefix: string) {
       const bulletIds = keys.filter((key) => key.slice(0, bulletPrefix.length) === bulletPrefix);
       
@@ -141,8 +140,6 @@ export async function cleanData(data: any) {
   // clean required labels
   const requiredLabels = ["firstName", "lastName"];
   requiredLabels.map((label) => {cleaned[label] = data[label]})
-
-  console.log(cleaned);
 
   return cleaned;
 }

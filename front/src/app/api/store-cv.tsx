@@ -18,6 +18,8 @@ export async function storeCV(data: any) {
   const db = client.db("resume_builder");
   const cvs = db.collection("cvs");
 
+  console.log(doc)
+
   // replace
   const filter = {"userId": userId}
   const options = { upsert: true };

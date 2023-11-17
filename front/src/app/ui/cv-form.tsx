@@ -47,6 +47,8 @@ export function CVForm(props: any) {
       <Projects register={register} cv={cv} /><br />
       <Research register={register} cv={cv} /><br />
       <WorkExperiences register={register} cv={cv} /><br />
+      <RelatedCoursework register={register} cv={cv} /><br />
+      <TechnicalSkills register={register} cv={cv} /><br />
       {/* {Educations(register, cv)}<br /> */}
       {/* {Projects(register)}<br />
       {Research(register)}<br />

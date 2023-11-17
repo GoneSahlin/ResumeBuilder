@@ -15,7 +15,7 @@ export function Educations(props: any) {
   ];
 
   const section = cv["educations"];
-  
+
   return (
     <>
       {CVSection("Education", fields, "education", register, section)}
