@@ -2,15 +2,21 @@
 
 import { Button, Container, Input, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { addResume } from "../api/add-resume";
-import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
 
 export type Inputs = {
   resumeName: string
 };
 
-export function NewResumeForm({ resumeNames }: {resumeNames: Array<string>}) {
-  const router = useRouter();
+export function NewResumeForm({
+  resumes,
+  setResumes,
+  setAddResumeActive,
+}:{
+  resumes: Array<any>,
+  setResumes: Dispatch<SetStateAction<any[]>>,
+  setAddResumeActive: Dispatch<SetStateAction<boolean>>,
+}) {
   const {
     register,
     handleSubmit,
@@ -18,14 +24,15 @@ export function NewResumeForm({ resumeNames }: {resumeNames: Array<string>}) {
   } = useForm<Inputs>({ shouldUnregister: true });
 
   const onSubmit = async (data: any) => {
-    router.push("/resume")
-    addResume(data);    
+    const newResume: any = {"resumeName": data.resumeName}
+    setResumes([...resumes, newResume]);
+    setAddResumeActive(false);
   };
 
   return (
     <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField label="Resume Name" defaultValue={"Resume " + (resumeNames.length + 1)}{...register("resumeName")} /><br />
+        <TextField label="Resume Name" defaultValue={"Resume " + (resumes.length + 1)}{...register("resumeName")} /><br />
 
         <Button type="submit">Add Resume</Button>
       </form>

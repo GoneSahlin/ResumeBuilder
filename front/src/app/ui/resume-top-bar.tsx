@@ -1,10 +1,20 @@
-'use client'
+'use client';
  
-import { useRouter } from 'next/navigation'
 import { Box, Button, ButtonGroup, Select } from "@mui/material";
+import { Dispatch, SetStateAction } from 'react';
+import { DeleteResumeMenu } from "./delete-resume-menu";
 
-export default function ResumeTopBar({resumeNames}:{resumeNames: Array<string>}) {
-  const router = useRouter();
+export default function ResumeTopBar({
+  resumes,
+  setResumes,
+  setAddResumeActive,
+}:{
+  resumes: Array<any>,
+  setResumes: Dispatch<SetStateAction<any[]>>,
+  setAddResumeActive: Dispatch<SetStateAction<boolean>>,
+}) {
+
+  const resumeNames: Array<string> = resumes.map((resume: any) => {return resume.resumeName});
 
   return (
     <Box>
@@ -15,8 +25,8 @@ export default function ResumeTopBar({resumeNames}:{resumeNames: Array<string>})
           );
         })}
       </ButtonGroup>
-      <Button type="button" onClick={() => router.push('/new-resume')}>New</Button>
-      {/* <DeleteResumeMenu /> */}
+      <Button type="button" onClick={() => setAddResumeActive(true)}>Add</Button>
+      <DeleteResumeMenu resumes={resumes} setResumes={setResumes} />
     </Box>
   )
 }

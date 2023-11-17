@@ -1,16 +1,25 @@
+import { Button, Menu, MenuItem } from "@mui/material";
+import { Dispatch, SetStateAction, useState } from "react";
 
-export function DeleteResumeMenu() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+export function DeleteResumeMenu({
+  resumes,
+  setResumes,
+}:{
+  resumes: Array<any>,
+  setResumes: Dispatch<SetStateAction<any[]>>,
+}) {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (resume: any) => {
     setAnchorEl(null);
+    setResumes([...resumes.filter((x) => {return x !== resume})])
   };
 
   return (
-    <div>
+    <>
       <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
@@ -18,7 +27,7 @@ export function DeleteResumeMenu() {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        Dashboard
+        Delete
       </Button>
       <Menu
         id="basic-menu"
@@ -29,10 +38,12 @@ export function DeleteResumeMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        {resumes.map((resume) => {
+          return (
+            <MenuItem onClick={() => handleClose(resume)}>{resume.resumeName}</MenuItem>
+          );
+        })}
       </Menu>
-    </div>
+    </>
   );
 }

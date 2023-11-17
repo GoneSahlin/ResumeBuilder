@@ -1,15 +1,12 @@
+"use server";
+
 import { fetchResumes } from "../api/fetch-resumes"
-import ResumeTopBar from "../ui/resume-top-bar"
+import Resumes from "../ui/resumes";
 
 export default async function Page() {
-  const resumes = await fetchResumes();
-
-  const resumeNames: Array<string> = resumes.map((resume) => {return resume.resumeName});
+  const resumes: Array<any> = await fetchResumes();
 
   return (
-    <div>
-      <ResumeTopBar resumeNames={resumeNames}/>
-      Resumes
-    </div>    
+     <Resumes initialResumes={resumes}/>
   )
 }
