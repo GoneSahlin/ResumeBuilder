@@ -36,12 +36,12 @@ export function CVSection(sectionName: string, fields: Array<Field>, prefix: str
             return (
               <div key={field.name}>
                 <label>{field.label}</label><br />
-                <input defaultValue={section[id][prefix + field.name]} {...register(createInputName(field.name, id))}></input><br />
+                <input defaultValue={id in section ? section[id][prefix + field.name] : ""} {...register(createInputName(field.name, id))}></input><br />
               </div>
             );
           })}
         </>
-        <Bullets id={prefix + id} register={register} defaultValues={section[id]["bullets"]} /><br />
+        <Bullets id={prefix + id} register={register} defaultValues={id in section ? section[id]["bullets"] : []} /><br />
       </div>
     );
   };
