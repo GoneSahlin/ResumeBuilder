@@ -4,15 +4,15 @@ import { Bullets } from "./bullets";
 import { Field } from "../lib/definitions";
 
 export function CVSection(sectionName: string, fields: Array<Field>, prefix: string, register: UseFormRegister<any>, section: Array<any>) {
-  const initialIds: Array<number> = [];
-  for (let i = 0; i < section.length; i++) {
-    initialIds.push(i);
-  }
+  const initialIds: Array<number> = section.map((item) => {return item.id});
   
   const [ids, setIds] = useState<Array<number>>(initialIds);
 
   function addItem() {
-    const nextId = ids.length > 0 ? ids[ids.length - 1] + 1 : 0;
+    let nextId = 0;
+    while (nextId in ids) {
+      nextId++;
+    }
 
     setIds([...ids, nextId])
   }

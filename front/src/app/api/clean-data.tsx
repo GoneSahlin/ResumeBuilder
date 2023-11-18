@@ -54,14 +54,19 @@ export async function cleanData(data: any) {
 
     const section: Array<any> = [];
     for (let i = 0; i < ids.length; i++) {
-      const id = ids[i];
-
       const item: any = {}
+      
+      // add id to item
+      const id = ids[i];
+      item["id"] = id;
+
+      // add labels to item
       for (let j = 0; j < labels.length; j++) {
         const label = labels[j];
         item[label] = data[label + id];
       }
 
+      // add bullets to item
       const combinedPrefix = bulletPrefix + id;
       const bullets = cleanBullets(combinedPrefix);
       item["bullets"] = bullets;
