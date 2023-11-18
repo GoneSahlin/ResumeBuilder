@@ -18,7 +18,7 @@ export async function fetchCV() {
   const doc = await cvs.findOne(filter);
 
   if (!doc) {
-    return {}
+    return {};
   }
 
   // format cv

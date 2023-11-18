@@ -2,6 +2,7 @@
 
 import { currentUser } from "@clerk/nextjs";
 import clientPromise from "./mongodb";
+import { Resume } from "../lib/definitions";
 
 export async function fetchResumes() {
   // add userId to doc
@@ -11,19 +12,30 @@ export async function fetchResumes() {
   // connection
   const client = await clientPromise;
   const db = client.db("resume_builder");
-  const resumes = db.collection("resumes");
+  const resumes_col = db.collection("resumes");
 
   // fetch
   const filter = {"userId": userId};
-  const docs = await resumes.find(filter).toArray();
+  const doc = await resumes_col.findOne(filter);
 
-  // format
-  const string_fields: Array<string> = ["resumeName"];
-  const formatted_docs = docs.map((doc) => {
-    const formatted: any = {}
-    string_fields.forEach((field) => (formatted[field] = doc[field]))
-    return formatted;
-  });
+  if (!doc) {
+    return [];
+  }
 
-  return formatted_docs;
+  // format resume
+  const resumes: Array<Resume> = doc.resumes.map((resume: Resume) => {
+    return resume as Resume;
+  })
+
+  return resumes;
+
+
+  // const string_fields: Array<string> = ["resumeName"];
+  // const formatted_docs = docs.map((doc) => {
+  //   const formatted: any = {}
+  //   string_fields.forEach((field) => (formatted[field] = doc[field]))
+  //   return formatted;
+  // });
+
+  // return formatted_docs;
 }
