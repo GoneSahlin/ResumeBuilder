@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import ResumeTopBar from "../ui/resume-top-bar"
+import ResumeTopBar from "./resume-top-bar"
 import { NewResumeForm } from "./new-resume-form";
-import { Resume } from "../lib/definitions";
+import { Resume } from "../../lib/definitions";
 import { ResumeItem } from "./resume-item";
 import { ResumeSection } from "./resume-section";
 

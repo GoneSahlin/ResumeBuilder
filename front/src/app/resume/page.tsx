@@ -3,7 +3,7 @@
 import { fetchCV } from "../api/fetch-cv";
 import { fetchResumes } from "../api/fetch-resumes"
 import { Resume } from "../lib/definitions";
-import Resumes from "../ui/resumes";
+import Resumes from "../ui/resume/resumes";
 
 export default async function Page() {
   const resumes: Array<Resume> = await fetchResumes();

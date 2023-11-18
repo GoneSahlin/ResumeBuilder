@@ -1,5 +1,5 @@
 import { UseFormRegister } from "react-hook-form";
-import { BulletSection } from "./bullet-section";
+import { BulletSection } from "./cv/bullet-section";
 
 export function TechnicalSkills(props: any) {
   const register: UseFormRegister<any> = props.register;
