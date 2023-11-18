@@ -25,11 +25,11 @@ export function ResumeSection({
   cvNameKey: string,
   addString: string,
 }) {
-  const sectionIds: Array<string> = resumes[activeResume][resumeIdKey];
+  const sectionIds: Array<number> = resumes[activeResume][resumeIdKey];
   const indexes: Array<number> = Array.from({length: sectionIds.length}, (item, index) => index);
 
-  const otherItems: Array<number> = cv[cvSectionKey].filter((item: any) => {
-    return !(item.id in sectionIds);
+  const otherItems: Array<any> = cv[cvSectionKey].filter((item: any) => {
+    return !(sectionIds.includes(item.id));
   });
 
   const otherIds: Array<number> = otherItems.map((item: any) => {return item.id})
