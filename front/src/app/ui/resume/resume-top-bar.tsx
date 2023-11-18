@@ -3,6 +3,7 @@
 import { Box, Button, ButtonGroup, Select } from "@mui/material";
 import { Dispatch, SetStateAction } from 'react';
 import { DeleteResumeMenu } from "./delete-resume-menu";
+import { storeResumes } from "@/app/api/store-resume";
 
 export default function ResumeTopBar({
   resumes,
@@ -20,6 +21,10 @@ export default function ResumeTopBar({
 
   const handleResumeButton = (i: number) => {
     setActiveResume(i);
+  }
+
+  const handleSaveClick = async () => {
+    storeResumes(resumes);
   }
 
   const indexes: Array<number> = Array.from({length: resumes.length}, (item, index) => index);
@@ -43,6 +48,7 @@ export default function ResumeTopBar({
       </ButtonGroup>
       <Button type="button" onClick={() => setAddResumeActive(true)}>Add</Button>
       <DeleteResumeMenu resumes={resumes} setResumes={setResumes} />
+      <Button variant="contained" type="button" onClick={handleSaveClick}>Save</Button>
     </Box>
   )
 }

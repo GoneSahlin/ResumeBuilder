@@ -14,7 +14,7 @@ export default function Resumes({initialResumes, cv} : {initialResumes: Array<Re
 
   return (
     <>
-      {addResumeActive ? (
+      {addResumeActive || resumes.length === 0 ? (
         <NewResumeForm resumes={resumes} setResumes={setResumes} setAddResumeActive={setAddResumeActive} />
       ):(
         <div>

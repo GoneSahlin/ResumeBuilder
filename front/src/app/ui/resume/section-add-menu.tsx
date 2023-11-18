@@ -17,10 +17,13 @@ export function SectionAddMenu({
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = (id: number) => {
+  const handleClose = () => {
     setAnchorEl(null);
-    addItem(id);
   };
+  const handleSelect = (id: number) => {
+    addItem(id);
+    setAnchorEl(null);
+  }
 
   const indexes: Array<number> = Array.from({length: ids.length}, (item, index) => index);
 
@@ -46,7 +49,7 @@ export function SectionAddMenu({
       >
         {indexes.map((i) => {
           return (
-            <MenuItem key={i} onClick={() => handleClose(ids[i])}>{itemStrings[i]}</MenuItem>
+            <MenuItem key={i} onClick={() => handleSelect(ids[i])}>{itemStrings[i]}</MenuItem>
           );
         })}
       </Menu>
