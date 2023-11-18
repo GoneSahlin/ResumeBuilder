@@ -1,6 +1,6 @@
 import { UseFormRegister } from "react-hook-form";
 import { CVSection } from "./cv-section";
-import { Field } from "../lib/definitions";
+import { Field } from "../../lib/definitions";
 
 export function Projects(props: any) {
   const register: UseFormRegister<any> = props.register;

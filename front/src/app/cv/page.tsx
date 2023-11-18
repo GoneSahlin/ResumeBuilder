@@ -1,5 +1,5 @@
 import { fetchCV } from "../api/fetch-cv";
-import { CVForm } from "../ui/cv-form";
+import { CVForm } from "../ui/cv/cv-form";
 import { Document } from "mongodb";
 
 export default async function Page() {

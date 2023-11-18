@@ -1,14 +1,14 @@
 "use client";
 
 import { useForm } from "react-hook-form"
-import { Contacts } from "../ui/contacts";
-import { Educations } from "../ui/educations";
-import { Projects } from "../ui/projects";
-import { Research } from "../ui/research";
-import { WorkExperiences } from "../ui/work-experience";
-import { RelatedCoursework } from "../ui/related-coursework";
-import { TechnicalSkills } from "../ui/technical-skills";
-import { storeCV } from "../api/store-cv";
+import { Contacts } from "./contacts";
+import { Educations } from "./educations";
+import { Projects } from "./projects";
+import { Research } from "./research";
+import { WorkExperiences } from "./work-experience";
+import { RelatedCoursework } from "./related-coursework";
+import { TechnicalSkills } from "./technical-skills";
+import { storeCV } from "../../api/store-cv";
 
 export type Inputs = {
   firstName: string
