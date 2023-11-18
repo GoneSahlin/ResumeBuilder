@@ -1,12 +1,15 @@
 "use server";
 
+import { fetchCV } from "../api/fetch-cv";
 import { fetchResumes } from "../api/fetch-resumes"
+import { Resume } from "../lib/definitions";
 import Resumes from "../ui/resumes";
 
 export default async function Page() {
-  const resumes: Array<any> = await fetchResumes();
+  const resumes: Array<Resume> = await fetchResumes();
+  const cv: Array<any> = await fetchCV();
 
   return (
-     <Resumes initialResumes={resumes}/>
+     <Resumes initialResumes={resumes} cv={cv}/>
   )
 }

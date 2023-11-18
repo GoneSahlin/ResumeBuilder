@@ -3,6 +3,7 @@
 import { Button, Container, Input, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
+import { Resume } from "../lib/definitions";
 
 export type Inputs = {
   resumeName: string
@@ -24,7 +25,15 @@ export function NewResumeForm({
   } = useForm<Inputs>({ shouldUnregister: true });
 
   const onSubmit = async (data: any) => {
-    const newResume: any = {"resumeName": data.resumeName}
+    const newResume: Resume = {
+      "resumeName": data.resumeName,
+      "educationIds": [],
+      "projectIds": [],
+      "researchIds": [],
+      "workExperienceIds": [],
+      "relatedCourseworkIds": [],
+      "technicalSkillsIds": [],
+    }
     setResumes([...resumes, newResume]);
     setAddResumeActive(false);
   };

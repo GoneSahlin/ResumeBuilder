@@ -5,5 +5,10 @@ export type Field = {
 
 export type Resume = {
     resumeName: string;
-    educationIds: string; 
+    educationIds: Array<number>;
+    projectIds: Array<number>;
+    researchIds: Array<number>;
+    workExperienceIds: Array<number>;
+    relatedCourseworkIds: Array<number>;
+    technicalSkillsIds: Array<number>; 
 }

@@ -3,13 +3,17 @@
 import { currentUser } from "@clerk/nextjs";
 import clientPromise from "./mongodb";
 
-export async function addResume(data: any) {
+export async function storeResumes(data: any) {
   const user = await currentUser();
   const userId = user?.id;
 
   const doc = {
     "userId": userId,
-    "resumeName": data.resumeName
+    "resumeName": data.resumeName,
+    "educationIds": [],
+    "projectIds": [],
+    "researchIds": [],
+    "workExperienceIds": [],
   }
 
   // connection
