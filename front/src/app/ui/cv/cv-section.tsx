@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 import { Bullets } from "./bullets";
-import { Field } from "../lib/definitions";
+import { Field } from "../../lib/definitions";
 
 export function CVSection(sectionName: string, fields: Array<Field>, prefix: string, register: UseFormRegister<any>, section: Array<any>) {
   const initialIds: Array<number> = section.map((item) => {return item.id});

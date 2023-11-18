@@ -29,13 +29,15 @@ export default function ResumeTopBar({
       <ButtonGroup>
         {indexes.map((i) => {
           return (
-            <Button 
-              key={resumes[i].resumeName}
-              onClick={() => handleResumeButton(i)}
-              variant={i === activeResume ? "contained" : "outlined"}
-            >
-              {resumes[i].resumeName}
-            </Button>
+            <div key={i}>
+              <Button 
+                key={resumes[i].resumeName}
+                onClick={() => handleResumeButton(i)}
+                variant={i === activeResume ? "contained" : "outlined"}
+              >
+                {resumes[i].resumeName}
+              </Button>
+            </div>
           );
         })}
       </ButtonGroup>

@@ -24,7 +24,7 @@ export default function Resumes({initialResumes, cv} : {initialResumes: Array<Re
             setAddResumeActive={setAddResumeActive}
             activeResume={activeResume}
             setActiveResume={setActiveResume}
-          />
+          /><br/>
           {/* Educations */}
           <ResumeSection 
             resumes={resumes}
@@ -33,8 +33,42 @@ export default function Resumes({initialResumes, cv} : {initialResumes: Array<Re
             cv={cv}
             resumeIdKey="educationIds"
             cvSectionKey="educations"
+            cvNameKey="educationName"
             addString="Add Education"
-          />          
+          /><br/>
+          {/* Projects */}
+          <ResumeSection 
+            resumes={resumes}
+            setResumes={setResumes}
+            activeResume={activeResume}
+            cv={cv}
+            resumeIdKey="projectIds"
+            cvSectionKey="projects"
+            cvNameKey="projectTitle"
+            addString="Add Project"
+          /><br/>
+          {/* Research */}
+          <ResumeSection 
+            resumes={resumes}
+            setResumes={setResumes}
+            activeResume={activeResume}
+            cv={cv}
+            resumeIdKey="researchIds"
+            cvSectionKey="research"
+            cvNameKey="researchTitle"
+            addString="Add Research"
+          /><br/>
+          {/* Work Experience */}
+          <ResumeSection 
+            resumes={resumes}
+            setResumes={setResumes}
+            activeResume={activeResume}
+            cv={cv}
+            resumeIdKey="workExperienceIds"
+            cvSectionKey="workExperience"
+            cvNameKey="workExperienceEmployer"
+            addString="Add Work Experience"
+          /><br/>
         </div>
       )}
     </>
