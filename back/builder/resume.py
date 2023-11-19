@@ -29,7 +29,7 @@ class Resume():
         self.researches = []
         self.work_experiences = []
         self.related_courseworks = []
-        self.technical_skills = []
+        self.technical_skills = []        
 
     def add_education(
         self,
@@ -181,3 +181,66 @@ class Resume():
 
     def to_pdf(self, filename):
         pass
+
+
+def from_cv_and_ids(cv, resume_ids):
+    resume = Resume(first_name=cv["firstName"],
+        last_name=cv["lastName"])
+
+    if "phone" in cv:
+        resume.phone = cv["phone"]
+    if "email" in cv:
+        resume.email = cv["email"]
+    if "github" in cv:
+        resume.github = cv["github"]
+    if "linkedin" in cv:
+        resume.github = cv["linkedin"]
+
+    for education_id in resume_ids["educationIds"]:
+        education = [item for item in cv["educations"] if item["id"] == education_id][0]
+
+        resume.add_education(
+            school_name=education["educationName"],
+            location=education["educationLocation"],
+            start_date=education["educationStartDate"],
+            end_date=education["educationEndDate"],
+            major=education["educationMajor"],
+            bullets=education["bullets"],
+        )
+
+    for project_id in resume_ids["projectIds"]:
+        project = [item for item in cv["projects"] if item["id"] == project_id][0]
+
+        resume.add_project(
+            name=project["projectTitle"],
+            url=project["projectUrl"],
+            tools=project["projectTools"],
+            date=project["projectDate"],
+            bullets=project["bullets"],
+        )
+
+    for research_id in resume_ids["researchIds"]:
+        research = [item for item in cv["research"] if item["id"] == research_id][0]
+    
+        resume.add_research(
+            name=research["researchTitle"],
+            url=research["researchUrl"],
+            tools=research["researchTools"],
+            date=research["researchDate"],
+            bullets=research["bullets"],
+        )
+
+    for work_experience_id in resume_ids["workExperienceIds"]:
+        work_experience = [item for item in cv["workExperience"] if item["id"] == work_experience_id][0]
+
+        resume.add_work_experience(
+            title=work_experience["workExperienceTitle"],
+            employer=work_experience["workExperienceEmployer"],
+            start_date=work_experience["workExperienceStartDate"],
+            end_date=work_experience["workExperienceEndDate"],
+            bullets=work_experience["bullets"],
+        )
+
+    
+
+    return resume
