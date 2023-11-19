@@ -7,6 +7,7 @@ import { Resume } from "../../lib/definitions";
 import { ResumeItem } from "./resume-item";
 import { ResumeSection } from "./resume-section";
 import { Grid } from "@mui/material";
+import { BulletResumeSection } from "./bullet-resume-section";
 
 export default function Resumes({initialResumes, cv} : {initialResumes: Array<Resume>, cv: any}) {
   const [resumes, setResumes] = useState<Array<Resume>>([...initialResumes]);
@@ -71,6 +72,26 @@ export default function Resumes({initialResumes, cv} : {initialResumes: Array<Re
               cvNameKey="workExperienceEmployer"
               addString="Add Work Experience"
             /><br/>
+            {/* Related Coursework */}
+            <BulletResumeSection
+              resumes={resumes}
+              setResumes={setResumes}
+              activeResume={activeResume}
+              cv={cv}
+              cvSectionKey="relatedCoursework"
+              resumeIdKey="relatedCourseworkIds"
+              addString="Add Related Coursework"
+            /><br />
+            {/* Technical Skills */}
+            <BulletResumeSection
+              resumes={resumes}
+              setResumes={setResumes}
+              activeResume={activeResume}
+              cv={cv}
+              cvSectionKey="technicalSkills"
+              resumeIdKey="technicalSkillsIds"
+              addString="Add Technical Skill"
+            /><br />
           </div>
         )}
       </Grid>

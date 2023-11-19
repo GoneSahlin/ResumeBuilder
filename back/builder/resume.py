@@ -241,6 +241,4 @@ def from_cv_and_ids(cv, resume_ids):
             bullets=work_experience["bullets"],
         )
 
-    
-
     return resume
