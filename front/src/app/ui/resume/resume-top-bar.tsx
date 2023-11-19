@@ -47,7 +47,7 @@ export default function ResumeTopBar({
         })}
       </ButtonGroup>
       <Button type="button" onClick={() => setAddResumeActive(true)}>Add</Button>
-      <DeleteResumeMenu resumes={resumes} setResumes={setResumes} />
+      <DeleteResumeMenu resumes={resumes} setResumes={setResumes} activeResume={activeResume} setActiveResume={setActiveResume}/>
       <Button variant="contained" type="button" onClick={handleSaveClick}>Save</Button>
     </Box>
   )

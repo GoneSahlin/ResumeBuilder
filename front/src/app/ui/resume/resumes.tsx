@@ -6,6 +6,7 @@ import { NewResumeForm } from "./new-resume-form";
 import { Resume } from "../../lib/definitions";
 import { ResumeItem } from "./resume-item";
 import { ResumeSection } from "./resume-section";
+import { Grid } from "@mui/material";
 
 export default function Resumes({initialResumes, cv} : {initialResumes: Array<Resume>, cv: any}) {
   const [resumes, setResumes] = useState<Array<Resume>>([...initialResumes]);
@@ -13,64 +14,69 @@ export default function Resumes({initialResumes, cv} : {initialResumes: Array<Re
   const [addResumeActive, setAddResumeActive] = useState(!(initialResumes.length > 0));
 
   return (
-    <>
-      {addResumeActive || resumes.length === 0 ? (
-        <NewResumeForm resumes={resumes} setResumes={setResumes} setAddResumeActive={setAddResumeActive} />
-      ):(
-        <div>
-          <ResumeTopBar
-            resumes={resumes}
-            setResumes={setResumes}
-            setAddResumeActive={setAddResumeActive}
-            activeResume={activeResume}
-            setActiveResume={setActiveResume}
-          /><br/>
-          {/* Educations */}
-          <ResumeSection 
-            resumes={resumes}
-            setResumes={setResumes}
-            activeResume={activeResume}
-            cv={cv}
-            resumeIdKey="educationIds"
-            cvSectionKey="educations"
-            cvNameKey="educationName"
-            addString="Add Education"
-          /><br/>
-          {/* Projects */}
-          <ResumeSection 
-            resumes={resumes}
-            setResumes={setResumes}
-            activeResume={activeResume}
-            cv={cv}
-            resumeIdKey="projectIds"
-            cvSectionKey="projects"
-            cvNameKey="projectTitle"
-            addString="Add Project"
-          /><br/>
-          {/* Research */}
-          <ResumeSection 
-            resumes={resumes}
-            setResumes={setResumes}
-            activeResume={activeResume}
-            cv={cv}
-            resumeIdKey="researchIds"
-            cvSectionKey="research"
-            cvNameKey="researchTitle"
-            addString="Add Research"
-          /><br/>
-          {/* Work Experience */}
-          <ResumeSection 
-            resumes={resumes}
-            setResumes={setResumes}
-            activeResume={activeResume}
-            cv={cv}
-            resumeIdKey="workExperienceIds"
-            cvSectionKey="workExperience"
-            cvNameKey="workExperienceEmployer"
-            addString="Add Work Experience"
-          /><br/>
-        </div>
-      )}
-    </>
+    <Grid container spacing={4}>
+      <Grid item xs={6}>
+        {addResumeActive || resumes.length === 0 ? (
+          <NewResumeForm resumes={resumes} setResumes={setResumes} setAddResumeActive={setAddResumeActive} />
+        ):(
+          <div>
+            <ResumeTopBar
+              resumes={resumes}
+              setResumes={setResumes}
+              setAddResumeActive={setAddResumeActive}
+              activeResume={activeResume}
+              setActiveResume={setActiveResume}
+            /><br/>
+            {/* Educations */}
+            <ResumeSection 
+              resumes={resumes}
+              setResumes={setResumes}
+              activeResume={activeResume}
+              cv={cv}
+              resumeIdKey="educationIds"
+              cvSectionKey="educations"
+              cvNameKey="educationName"
+              addString="Add Education"
+            /><br/>
+            {/* Projects */}
+            <ResumeSection 
+              resumes={resumes}
+              setResumes={setResumes}
+              activeResume={activeResume}
+              cv={cv}
+              resumeIdKey="projectIds"
+              cvSectionKey="projects"
+              cvNameKey="projectTitle"
+              addString="Add Project"
+            /><br/>
+            {/* Research */}
+            <ResumeSection 
+              resumes={resumes}
+              setResumes={setResumes}
+              activeResume={activeResume}
+              cv={cv}
+              resumeIdKey="researchIds"
+              cvSectionKey="research"
+              cvNameKey="researchTitle"
+              addString="Add Research"
+            /><br/>
+            {/* Work Experience */}
+            <ResumeSection 
+              resumes={resumes}
+              setResumes={setResumes}
+              activeResume={activeResume}
+              cv={cv}
+              resumeIdKey="workExperienceIds"
+              cvSectionKey="workExperience"
+              cvNameKey="workExperienceEmployer"
+              addString="Add Work Experience"
+            /><br/>
+          </div>
+        )}
+      </Grid>
+      <Grid item xs={6}>
+        PDF File
+      </Grid>
+    </Grid>
   )
 }

@@ -10,6 +10,6 @@ export default async function Page() {
   const cv: Array<any> = await fetchCV();
 
   return (
-     <Resumes initialResumes={resumes} cv={cv}/>
+     <Resumes initialResumes={resumes} cv={cv} />
   )
 }

@@ -4,9 +4,13 @@ import { Dispatch, SetStateAction, useState } from "react";
 export function DeleteResumeMenu({
   resumes,
   setResumes,
+  activeResume,
+  setActiveResume,
 }:{
   resumes: Array<any>,
   setResumes: Dispatch<SetStateAction<any[]>>,
+  activeResume: number,
+  setActiveResume: Dispatch<SetStateAction<number>>,
 }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -16,6 +20,9 @@ export function DeleteResumeMenu({
   const handleClose = (resume: any) => {
     setAnchorEl(null);
     setResumes([...resumes.filter((x) => {return x !== resume})])
+    if (resumes[activeResume] === resume) {
+      setActiveResume(--activeResume);
+    }
   };
 
   return (

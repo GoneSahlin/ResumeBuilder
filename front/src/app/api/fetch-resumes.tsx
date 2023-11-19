@@ -28,14 +28,4 @@ export async function fetchResumes() {
   })
 
   return resumes;
-
-
-  // const string_fields: Array<string> = ["resumeName"];
-  // const formatted_docs = docs.map((doc) => {
-  //   const formatted: any = {}
-  //   string_fields.forEach((field) => (formatted[field] = doc[field]))
-  //   return formatted;
-  // });
-
-  // return formatted_docs;
 }

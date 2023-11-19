@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@mui/material";
+import { Box, Button, Container, Grid, List } from "@mui/material";
 import { ResumeItem } from "./resume-item";
 import { Dispatch, SetStateAction } from "react";
 import { SectionAddMenu } from "./section-add-menu";
@@ -41,20 +41,42 @@ export function ResumeSection({
     setResumes([...resumes.slice(0, activeResume), newResume, ...resumes.slice(activeResume + 1)])
   }
 
+  const moveUp = (i: number) => {
+    const newResume: any = {...resumes[activeResume]}
+    const tmp: number = newResume[resumeIdKey][i];
+    newResume[resumeIdKey][i] = newResume[resumeIdKey][i - 1];
+    newResume[resumeIdKey][i - 1] = tmp;
+    setResumes([...resumes.slice(0, activeResume), newResume, ...resumes.slice(activeResume + 1)])
+  }
+
+  const remove = (i: number) => {
+    const newResume: any = {...resumes[activeResume]}
+    newResume[resumeIdKey] = [...newResume[resumeIdKey].slice(0, i), ...newResume[resumeIdKey].slice(i + 1)]
+    setResumes([...resumes.slice(0, activeResume), newResume, ...resumes.slice(activeResume + 1)])
+  }
+
   return (
     <>
-      {indexes.map((i) => {
-        // find name
-        const name: string = cv[cvSectionKey].filter((item: any) => {return item.id === sectionIds[i]})[0][cvNameKey];
-        return (
-          <div key={i}>
-            <ResumeItem name={name} />
-          </div>
-        );
-      })}
+      <List>
+        {indexes.map((i) => {
+          // find name
+          const name: string = cv[cvSectionKey].filter((item: any) => {return item.id === sectionIds[i]})[0][cvNameKey];
+          return (
+            <ResumeItem
+              key={i}
+              name={name}
+              upArrow={i > 0}
+              downArrow={i < indexes.length - 1}
+              moveUp={() => moveUp(i)}
+              moveDown={() => moveUp(i + 1)}
+              remove={() => remove(i)}
+            />
+          );
+        })}
+      </List>
       {otherIds.length > 0 ? (
         <SectionAddMenu addString={addString} ids={otherIds} itemStrings={itemStrings} addItem={addItem}/>
       ) : (<></>)}
-    </>
+    </>      
   );
 }
