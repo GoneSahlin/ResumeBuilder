@@ -1,5 +1,4 @@
 import unittest
-import json
 
 from lambdas.create_pdf import lambda_handler
 
@@ -11,4 +10,4 @@ class TestLambda(unittest.TestCase):
         response = lambda_handler(event, {})
 
         assert response["statusCode"] == 200
-
+        assert response["body"]

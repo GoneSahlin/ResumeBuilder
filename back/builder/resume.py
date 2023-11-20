@@ -83,7 +83,7 @@ class Resume():
             latex = template.read()
 
         # contacts
-        latex += Template("\n\\name{$first}{$last}").substitute(first=self.first_name, last=self.last_name)
+        latex += Template("\n\\firstname{$first}\n\\lastname{$last}\n\\listfiles").substitute(first=self.first_name, last=self.last_name)
 
         if self.email:
             latex += Template("\n\\email{$email}").substitute(email=self.email)
