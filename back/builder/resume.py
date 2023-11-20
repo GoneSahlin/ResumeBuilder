@@ -241,4 +241,14 @@ def from_cv_and_ids(cv, resume_ids):
             bullets=work_experience["bullets"],
         )
 
+    for related_coursework_id in resume_ids["relatedCourseworkIds"]:
+        related_coursework = [value for i, value in enumerate(cv["relatedCoursework"]) if i == int(related_coursework_id)][0]
+
+        resume.add_related_coursework(related_coursework)
+
+    for technical_skill_id in resume_ids["technicalSkillsIds"]:
+        techincal_skill = [value for i, value in enumerate(cv["technicalSkills"]) if i == int(technical_skill_id)][0]
+
+        resume.add_technical_skill(techincal_skill)
+
     return resume

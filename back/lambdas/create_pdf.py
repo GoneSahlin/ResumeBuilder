@@ -8,7 +8,7 @@ def lambda_handler(event, context):
 
   formatted_resume = from_cv_and_ids(cv, resume)
 
-    
+  
 
   # return response
   return {
