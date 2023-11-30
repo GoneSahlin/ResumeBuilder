@@ -12,8 +12,8 @@ run-builder: $(VENV)
 	$(VENV)/bin/python3 $(MODULE)/main.py
 
 .PHONY: build-image
-build-image: $(SRC)/Dockerfile
-	docker build --platform linux/amd64 -t docker-image:test $(SRC)
+build-image: back/Dockerfile
+	docker build --platform linux/amd64 -t docker-image:test back
 
 .PHONY: test
 test: $(VENV)
