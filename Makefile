@@ -15,9 +15,17 @@ run-builder: $(VENV)
 build-image: back/Dockerfile
 	docker build --platform linux/amd64 -t docker-image:test back
 
-.PHONY: test
-test: $(VENV)
+.PHONY: start-container
+start-container: build-image
+	docker run --name Resume_Builder --platform linux/amd64 -p 9000:8080 docker-image:test &
+
+.PHONY: test-builder
+test-builder: $(VENV)
 	$(VENV)/bin/python3 -m unittest discover -v -s $(SRC)/test
+
+.PHONY: test-lambdas
+test-lambdas: $(VENV)
+	cd back && ../$(VENV)/bin/python3 -m unittest discover -v
 
 .PHONY: lint
 lint: $(VENV)
