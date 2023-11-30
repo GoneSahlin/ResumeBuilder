@@ -2275,6 +2275,7 @@ ifxetex
 knuth-lib
 oberdiek
 pdftex
+pgf
 tex-ini-files
 unicode-data
 
@@ -2533,6 +2534,35 @@ uniquecounter.sty
 glyphtounicode.tex
 pdfcolor.tex
 
+./tex/generic/pgf:
+basiclayer
+frontendlayer
+math
+systemlayer
+utilities
+
+./tex/generic/pgf/basiclayer:
+pgfcore.code.tex
+
+./tex/generic/pgf/frontendlayer:
+tikz
+
+./tex/generic/pgf/frontendlayer/tikz:
+tikz.code.tex
+
+./tex/generic/pgf/math:
+pgfmath.code.tex
+
+./tex/generic/pgf/systemlayer:
+pgfsys.code.tex
+pgfsysprotocol.code.tex
+pgfsyssoftpath.code.tex
+
+./tex/generic/pgf/utilities:
+pgffor.code.tex
+pgfkeys.code.tex
+pgfrcs.code.tex
+
 ./tex/generic/tex-ini-files:
 dvilualatex.ini
 dviluatex.ini
@@ -2559,6 +2589,7 @@ ae
 amscls
 amsfonts
 amsmath
+arydshln
 babelbib
 base
 carlisle
@@ -2567,6 +2598,7 @@ etex-pkg
 etoolbox
 fancyhdr
 fix2col
+fontawesome5
 geometry
 graphics
 graphics-cfg
@@ -2581,8 +2613,10 @@ mflogo
 mfnfss
 microtype
 moderncv
+multirow
 natbib
 oberdiek
+pgf
 pslatex
 psnfss
 pspicture
@@ -2641,6 +2675,9 @@ amstex.sty
 amstext.sty
 amsxtra.sty
 
+./tex/latex/arydshln:
+arydshln.sty
+
 ./tex/latex/babelbib:
 afrikaans.bdf
 babelbib.sty
@@ -2673,6 +2710,8 @@ applemac.def
 article.cls
 article.sty
 ascii.def
+atbegshi-ltx.sty
+atveryend-ltx.sty
 bezier.sty
 bk10.clo
 bk11.clo
@@ -2848,6 +2887,15 @@ fancyheadings.sty
 ./tex/latex/fix2col:
 fix2col.sty
 
+./tex/latex/fontawesome5:
+fontawesome5-generic-helper.sty
+fontawesome5-mapping.def
+fontawesome5.sty
+ufontawesomebrands0.fd
+ufontawesomefree0.fd
+ufontawesomefree1.fd
+ufontawesomefree2.fd
+
 ./tex/latex/geometry:
 geometry.sty
 
@@ -2925,7 +2973,11 @@ expl3-code.tex
 expl3.sty
 
 ./tex/latex/l3packages:
+l3keys2e
 xparse
+
+./tex/latex/l3packages/l3keys2e:
+l3keys2e.sty
 
 ./tex/latex/l3packages/xparse:
 xparse-2018-04-12.sty
@@ -3043,6 +3095,9 @@ moderncvstyleempty.sty
 moderncvstylefancy.sty
 moderncvstyleoldstyle.sty
 tweaklist.sty
+
+./tex/latex/multirow:
+multirow.sty
 
 ./tex/latex/natbib:
 bibentry.sty
@@ -3186,6 +3241,36 @@ zref-titleref.sty
 zref-totpages.sty
 zref-user.sty
 zref-xr.sty
+
+./tex/latex/pgf:
+basiclayer
+compatibility
+frontendlayer
+math
+systemlayer
+utilities
+
+./tex/latex/pgf/basiclayer:
+pgfcore.sty
+pgf.sty
+
+./tex/latex/pgf/compatibility:
+pgfcomp-version-0-65.sty
+pgfcomp-version-1-18.sty
+
+./tex/latex/pgf/frontendlayer:
+tikz.sty
+
+./tex/latex/pgf/math:
+pgfmath.sty
+
+./tex/latex/pgf/systemlayer:
+pgfsys.sty
+
+./tex/latex/pgf/utilities:
+pgffor.sty
+pgfkeys.sty
+pgfrcs.sty
 
 ./tex/latex/pslatex:
 pslatex.sty

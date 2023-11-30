@@ -71,6 +71,8 @@ class TestResume(unittest.TestCase):
 
         latex = resume.create_latex()
 
+        print(latex)
+
         assert latex
 
     def test_from_cv_and_ids(self):
