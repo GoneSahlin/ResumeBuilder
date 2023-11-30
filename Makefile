@@ -1,31 +1,31 @@
-VENV = .venv
+VENV = back/.venv
 MODULE = builder
 SRC = back/src
 
-$(SRC)/$(VENV): $(SRC)/setup.cfg
-	python3 -m venv $(SRC)/$(VENV)
-	$(SRC)/$(VENV)/bin/pip install -e $(SRC)[dev]
-	touch $(SRC)/$(VENV)
+$(VENV): $(SRC)/setup.cfg
+	python3 -m venv $(VENV)
+	$(VENV)/bin/pip install -e $(SRC)[dev]
+	touch $(VENV)
 
 .PHONY: run-builder
-run-builder: $(SRC)/$(VENV)
-	cd $(SRC) && $(VENV)/bin/python3 $(MODULE)/main.py
+run-builder: $(VENV)
+	$(VENV)/bin/python3 $(MODULE)/main.py
 
 .PHONY: build-image
 build-image: $(SRC)/Dockerfile
 	docker build --platform linux/amd64 -t docker-image:test $(SRC)
 
 .PHONY: test
-test: $(SRC)/$(VENV)
-	cd $(SRC) && $(VENV)/bin/python3 -m unittest discover test -v
+test: $(VENV)
+	$(VENV)/bin/python3 -m unittest discover -v -s $(SRC)/test
 
 .PHONY: lint
-lint: $(SRC)/$(VENV)
-	-$(SRC)/$(VENV)/bin/flake8 $(SRC) --exclude $(SRC)/$(VENV)
+lint: $(VENV)
+	-$(VENV)/bin/flake8 $(SRC) --exclude $(SRC)/$(VENV)
 
 .PHONY: format
-format: $(SRC)/$(VENV)
-	$(SRC)/$(VENV)/bin/black $(SRC)
+format: $(VENV)
+	$(VENV)/bin/black $(SRC)
 
 .PHONY: run-dev
 run-dev:
@@ -34,6 +34,6 @@ run-dev:
 
 .PHONY: clean
 clean:
-	rm -rf $(SRC)/$(VENV)
+	rm -rf $(VENV)
 	find . -type d -name __pycache__ -exec rm -rf {} +
 	find . -type d -name '*.egg-info' -exec rm -rf {} +

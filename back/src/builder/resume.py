@@ -1,5 +1,6 @@
 import os
 from string import Template
+from importlib import resources
 
 from builder.education import Education
 from builder.project import Project
@@ -68,7 +69,10 @@ class Resume:
         self.technical_skills.append(technical_skill)
 
     def create_latex(self):
-        template_filename = os.path.join("lib", "latex_template")
+        # get template from package resources
+        pkg = resources.files("lib")
+        template_filename = pkg / "latex_template"
+
         with open(template_filename, "r") as template:
             latex = template.read()
 
