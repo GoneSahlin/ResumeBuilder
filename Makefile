@@ -2,7 +2,7 @@ VENV = back/.venv
 MODULE = builder
 SRC = back/src
 
-$(VENV): $(SRC)/setup.cfg
+$(VENV): $(SRC)/setup.cfg $(SRC)/pyproject.toml
 	python3 -m venv $(VENV)
 	$(VENV)/bin/pip install -e $(SRC)[dev]
 	touch $(VENV)

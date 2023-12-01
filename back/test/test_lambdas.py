@@ -54,8 +54,8 @@ class TestLambda(unittest.TestCase):
         
         # check response
         response = p2.stdout.decode()
-        print("response:", response)
-        # assert "Hello from AWS Lambda using Python3" in response
+        
+        json_obj = json.loads(response)
 
-        # assert response["statusCode"] == 200
-        # assert response["body"]
+        assert json_obj["statusCode"] == 200
+        assert json_obj["body"]

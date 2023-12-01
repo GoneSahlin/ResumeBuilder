@@ -1,49 +1,59 @@
 import subprocess
 import os
+import json
+import base64
 
 from builder.resume import from_cv_and_ids
 
 
 def lambda_handler(event, context):
+    cv = event["cv"]
+    resume = event["resume"]
 
-  cv = event["cv"]
-  resume = event["resume"]
+    formatted_resume = from_cv_and_ids(cv, resume)
 
-  formatted_resume = from_cv_and_ids(cv, resume)
+    latex = formatted_resume.create_latex()
 
-  latex = formatted_resume.create_latex()
+    # latex = """\documentclass[12pt, letterpaper]{article}\\title{My first LaTeX document}\\author{Hubert Farnsworth\\thanks{Funded by the Overleaf team.}}\date{August 2022}\\begin{document}\\maketitleWe have now added a title, author and date to our first \\LaTeX{} document!\\end{document}"""
 
-  # latex = """\documentclass[12pt, letterpaper]{article}\\title{My first LaTeX document}\\author{Hubert Farnsworth\\thanks{Funded by the Overleaf team.}}\date{August 2022}\\begin{document}\\maketitleWe have now added a title, author and date to our first \\LaTeX{} document!\\end{document}"""
+    directories = ["/tmp/input", "/tmp/output"]
+    for directory in directories:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
 
+    input_path = "/tmp/input/resume.tex"
+    with open(input_path, 'w') as outfile:
+        outfile.write(latex)
 
-  directories = ["/tmp/input", "/tmp/output"]
-  for directory in directories:
-      if not os.path.exists(directory):
-          os.makedirs(directory)
+    bin = "pdflatex"
+    bash_command = [bin,
+                    "-output-directory", "/tmp/output", "-interaction=nonstopmode",
+                    input_path]
+    process = subprocess.Popen(bash_command, stdout=subprocess.PIPE)
+    output, error = process.communicate()
+    print(output)
+    print(error)
+    pdf_path = "/tmp/output/resume.pdf"
+    print(pdf_path)
 
-  input_path = "/tmp/input/resume.tex"
-  with open(input_path, 'w') as outfile:
-      outfile.write(latex)
+    # read output file
+    with open(pdf_path, 'rb') as pdf_file:
+        pdf_bytes = pdf_file.read()
 
-#   bin = "tlsb-gui-installer/bin/x86_64-linux/pdflatex"
-  # bin = "/opt/tlsb-gui-installer/bin/x86_64-linux/pdflatex"
-  bin = "pdflatex"
-  bash_command = [bin,
-                  "-output-directory", "/tmp/output", "-interaction=nonstopmode",
-                  input_path]
-  process = subprocess.Popen(bash_command, stdout=subprocess.PIPE)
-  output, error = process.communicate()
-  print(output)
-  print(error)
-  pdf_path = "/tmp/output/resume.pdf"
-  print(pdf_path)
+    
+    # bytes = base64.b64decode(pdf_bytes)
+    # pdf_str = bytes.decode("ascii")
+    # pdf_bytes = pdf_file.
+    # pdf_str = pdf_bytes
 
-  # read output file
-  with open(pdf_path, 'r') as pdf_file:
-      pdf_str = pdf_file.read()
+    # print(type(pdf_str))
 
-  # return response
-  return {
-      "statusCode": 200,
-      "body": pdf_str
-  }
+    # new String(Base64.getMimeEncoder().encode(content), StandardCharsets.UTF_8)
+
+    
+
+    # return response
+    return {
+        "statusCode": 200,
+        "body": base64.b64encode(pdf_bytes).decode('utf-8')
+    }
