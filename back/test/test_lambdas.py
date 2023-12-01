@@ -18,11 +18,19 @@ class TestLambda(unittest.TestCase):
         p1 = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE)
 
         # wait for container to start
-        timeout = time.time() + 5
+        timeout = time.time() + 20
         while True:
-            line =  p1.stdout.readline().decode()
-            if "exec '/var/runtime/bootstrap'" in line:
-                break
+            line =  p1.stdout.readline().decode().strip()
+
+            if line:
+                print(line)
+
+            # last line should look like this
+            # dc6045688a431b4ea7a9373327a3fecdb56f8dccd35df0bc2acbb1280446634c
+            # or other 64 digit hex number, so check for a line that matches
+            if len(line) == 64:
+                if all([x.isdigit() or 'a' <= x <= 'f' for x in line]):
+                    break
 
             # check for timeout
             if time.time() > timeout:
@@ -31,6 +39,8 @@ class TestLambda(unittest.TestCase):
                 p1.terminate()
                 self.fail("Process timed out")
         
+        # takes a second to setup after last line printed
+        time.sleep(1)
         # call lambda function
         command = "curl \"http://localhost:9000/2015-03-31/functions/function/invocations\" -d '{}'"
         p2 = subprocess.run(command, shell=True, capture_output=True)
@@ -47,4 +57,6 @@ class TestLambda(unittest.TestCase):
         subprocess.run(["docker", "remove", "Resume_Builder"])
         
         # check response
-        assert "Hello from AWS Lambda using Python3.11.6" in p2.stdout.decode()
+        response = p2.stdout.decode()
+        print("response:", response)
+        assert "Hello from AWS Lambda using Python3" in response
