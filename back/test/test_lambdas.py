@@ -2,7 +2,6 @@ import unittest
 import subprocess
 import time
 
-# from lambdas.create_pdf import lambda_handler
 
 class TestLambda(unittest.TestCase):
     # def test_create_pdf(self):
