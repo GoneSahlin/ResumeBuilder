@@ -25,8 +25,9 @@ def lambda_handler(event, context):
   with open(input_path, 'w') as outfile:
       outfile.write(latex)
 
-  bin = "tlsb-gui-installer/bin/x86_64-linux/pdflatex"
+#   bin = "tlsb-gui-installer/bin/x86_64-linux/pdflatex"
   # bin = "/opt/tlsb-gui-installer/bin/x86_64-linux/pdflatex"
+  bin = "pdflatex"
   bash_command = [bin,
                   "-output-directory", "/tmp/output", "-interaction=nonstopmode",
                   input_path]
