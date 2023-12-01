@@ -18,7 +18,7 @@ build-image: back/Dockerfile
 .PHONY: start-container
 start-container: build-image
 	# docker run --name Resume_Builder --platform linux/amd64 -p 9000:8080 docker-image:test &
-	docker run --name Resume_Builder --platform linux/amd64 -d -v ~/.aws-lambda-rie:/aws-lambda -p 9000:8080 --entrypoint /aws-lambda/aws-lambda-rie docker-image:test /usr/bin/python -m awslambdaric lambda_function.handler
+	docker run --name Resume_Builder --platform linux/amd64 -d -v ~/.aws-lambda-rie:/aws-lambda -p 9000:8080 --entrypoint /aws-lambda/aws-lambda-rie docker-image:test /usr/bin/python -m awslambdaric create_pdf.lambda_handler
 
 .PHONY: test-builder
 test-builder: $(VENV)

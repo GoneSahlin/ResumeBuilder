@@ -20,10 +20,10 @@ RUN dnf install texlive-ec -y
 RUN dnf install texlive-fontawesome5 -y
 
 # Copy function code
-COPY lambdas/lambda_function.py ${LAMBDA_TASK_ROOT}
+COPY lambdas/create_pdf.py ${LAMBDA_TASK_ROOT}
 
 # Entrypoint
 ENTRYPOINT [ "/usr/bin/python3", "-m", "awslambdaric" ]
 
 # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
-CMD [ "lambda_function.handler" ]
+CMD [ "create_pdf.lambda_handler" ]
