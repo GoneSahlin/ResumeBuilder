@@ -70,7 +70,7 @@ class Resume:
 
     def create_latex(self):
         # get template from package resources
-        pkg = resources.files("lib")
+        pkg = resources.files("builder")
         template_filename = pkg / "latex_template"
 
         with open(template_filename, "r") as template:

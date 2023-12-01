@@ -10,7 +10,7 @@ class TestLambda(unittest.TestCase):
         p1 = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE)
 
         # wait for container to start
-        timeout = time.time() + 20
+        timeout = time.time() + 60
         while True:
             line =  p1.stdout.readline().decode().strip()
 
@@ -39,7 +39,6 @@ class TestLambda(unittest.TestCase):
             
         # call lambda function
         command = f"curl \"http://localhost:9000/2015-03-31/functions/function/invocations\" -d '{json.dumps(event)}'"
-        print(command)
         p2 = subprocess.run(command, shell=True, capture_output=True)
 
         # close pipes
