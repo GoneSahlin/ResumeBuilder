@@ -14,17 +14,25 @@ async function getPdfs(cv: Array<any>, resumes: Array<Resume>) {
   })
   const event = JSON.stringify(events[0])
 
-  const url = "https://hf7pjdm35v4mkzg2kgiv4blqje0ctwni.lambda-url.us-east-1.on.aws/?event=" + event
+  const url = "https://hf7pjdm35v4mkzg2kgiv4blqje0ctwni.lambda-url.us-east-1.on.aws/" //?event=" + event
 
-  const response = await fetch(url)
+  // "curl \"http://localhost:9000/2015-03-31/functions/function/invocations\" -d '{json.dumps(event)}'"
   // const response = await fetch(url, {
   //   method: 'POST',
   //   headers: {
   //     'Accept': 'application/json',
   //     'Content-Type': 'application/json'
   //   },
-  //   body: JSON.stringify({"event": events[0]})
+  //   body: event
   // });
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({"event": events[0]})
+  });
 
   // console.log(url)
   // const response = await fetch(url)
