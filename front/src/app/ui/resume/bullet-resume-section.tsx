@@ -27,8 +27,6 @@ export function BulletResumeSection({
   const otherIds: Array<any> = cv[cvSectionKey].map((val: string, i: number) => {return !sectionIds.includes(i) ? (i) : (null)}).filter((x: any) => {return x !== null});
   const otherStrings: Array<string> = otherIds.map((i: number) => {return cv[cvSectionKey][i]})
 
-  console.log(otherIds, otherStrings);
-
   const addItem = (id: number) => {
     const newResume: any = {...resumes[activeResume]}
     newResume[resumeIdKey] = [...newResume[resumeIdKey], id];

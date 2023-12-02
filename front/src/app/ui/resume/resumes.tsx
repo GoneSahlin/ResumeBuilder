@@ -9,10 +9,20 @@ import { ResumeSection } from "./resume-section";
 import { Grid } from "@mui/material";
 import { BulletResumeSection } from "./bullet-resume-section";
 
-export default function Resumes({initialResumes, cv} : {initialResumes: Array<Resume>, cv: any}) {
+export default function Resumes({
+  initialResumes,
+  cv,
+  pdfs,
+} : {
+  initialResumes: Array<Resume>,
+  cv: any,
+  pdfs: Array<any>,
+}) {
   const [resumes, setResumes] = useState<Array<Resume>>([...initialResumes]);
   const [activeResume, setActiveResume] = useState<number>(0);
   const [addResumeActive, setAddResumeActive] = useState(!(initialResumes.length > 0));
+
+  const pdf = pdfs[activeResume]
 
   return (
     <Grid container spacing={4}>
@@ -96,7 +106,8 @@ export default function Resumes({initialResumes, cv} : {initialResumes: Array<Re
         )}
       </Grid>
       <Grid item xs={6}>
-        PDF File
+        <iframe src={"data:application/pdf;base64," + pdf} width="100%" height="100%"/>
+        {/* PDF File */}
       </Grid>
     </Grid>
   )
