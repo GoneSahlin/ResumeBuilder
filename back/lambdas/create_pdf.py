@@ -7,8 +7,13 @@ from builder.resume import from_cv_and_ids
 
 
 def lambda_handler(event, context):
-    cv = event["cv"]
-    resume = event["resume"]
+    if "body" in event:
+        body = json.loads(event["body"])
+        cv = body["cv"]
+        resume = body["resume"]
+    else:
+        cv = event["cv"]
+        resume = event["resume"]
 
     formatted_resume = from_cv_and_ids(cv, resume)
 
