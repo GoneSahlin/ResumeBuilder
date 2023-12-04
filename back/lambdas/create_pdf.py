@@ -2,6 +2,8 @@ import subprocess
 import os
 import json
 import base64
+import boto3
+from uuid import uuid4
 
 from builder.resume import from_cv_and_ids
 
@@ -41,12 +43,20 @@ def lambda_handler(event, context):
     pdf_path = "/tmp/output/resume.pdf"
     print(pdf_path)
 
-    # read output file
-    with open(pdf_path, 'rb') as pdf_file:
-        pdf_bytes = pdf_file.read()
+    # create s3_filename
+    id = uuid4().hex
+    s3_filename = id + ".pdf"
+
+    # copy file to s3
+    s3 = boto3.resource('s3')
+    BUCKET = "resume-builder-pdfs"
+    s3.Bucket(BUCKET).upload_file(pdf_path, s3_filename)
+
+    # s3 object url
+    url = "https://resume-builder-pdfs.s3.amazonaws.com/" + s3_filename
 
     # return response
     return {
         "statusCode": 200,
-        "body": base64.b64encode(pdf_bytes).decode('utf-8')
+        "body": url
     }

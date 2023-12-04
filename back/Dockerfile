@@ -10,6 +10,7 @@ RUN dnf install python3 -y
 # Install the specified packages
 RUN pip install ./src
 RUN pip install awslambdaric
+RUN pip install boto3
 
 # Install TexLive
 RUN dnf install texlive-latex -y
