@@ -49,7 +49,7 @@ def lambda_handler(event, context):
     # copy file to s3
     s3 = boto3.resource('s3')
     BUCKET = "resume-builder-pdfs"
-    s3.Bucket(BUCKET).upload_file(pdf_path, s3_filename)
+    s3.Bucket(BUCKET).upload_file(pdf_path, s3_filename, ExtraArgs={'ContentType': 'application/pdf'})
 
     # s3 object url
     url = "https://resume-builder-pdfs.s3.amazonaws.com/" + s3_filename

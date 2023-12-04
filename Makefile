@@ -20,6 +20,13 @@ start-container: build-image
 	# docker run --name Resume_Builder --platform linux/amd64 -p 9000:8080 docker-image:test &
 	docker run --name Resume_Builder --platform linux/amd64 -d -v ~/.aws-lambda-rie:/aws-lambda -p 9000:8080 --entrypoint /aws-lambda/aws-lambda-rie docker-image:test /usr/bin/python -m awslambdaric create_pdf.lambda_handler
 
+.PHONY: deploy-image
+deploy-image:
+	aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 017840219420.dkr.ecr.us-east-1.amazonaws.com
+	docker build --platform linux/amd64 -t resume-builder-lambda-container back
+	docker tag resume-builder-lambda-container:latest 017840219420.dkr.ecr.us-east-1.amazonaws.com/resume-builder-lambda-container:latest
+	docker push 017840219420.dkr.ecr.us-east-1.amazonaws.com/resume-builder-lambda-container:latest
+
 .PHONY: test-builder
 test-builder: $(VENV)
 	$(VENV)/bin/python3 -m unittest discover -v -s $(SRC)/test
