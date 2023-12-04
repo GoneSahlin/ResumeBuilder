@@ -82,3 +82,5 @@ class TestLambda(unittest.TestCase):
         # check response
         assert response
         assert type(response) == str
+        assert response[:45] == "https://resume-builder-pdfs.s3.amazonaws.com/"
+        assert response[-4:] == ".pdf"
