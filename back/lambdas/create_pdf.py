@@ -45,18 +45,6 @@ def lambda_handler(event, context):
     with open(pdf_path, 'rb') as pdf_file:
         pdf_bytes = pdf_file.read()
 
-    
-    # bytes = base64.b64decode(pdf_bytes)
-    # pdf_str = bytes.decode("ascii")
-    # pdf_bytes = pdf_file.
-    # pdf_str = pdf_bytes
-
-    # print(type(pdf_str))
-
-    # new String(Base64.getMimeEncoder().encode(content), StandardCharsets.UTF_8)
-
-    
-
     # return response
     return {
         "statusCode": 200,
