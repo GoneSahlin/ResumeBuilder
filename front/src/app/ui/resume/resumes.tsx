@@ -12,17 +12,17 @@ import { BulletResumeSection } from "./bullet-resume-section";
 export default function Resumes({
   initialResumes,
   cv,
-  pdfs,
+  pdf_urls,
 } : {
   initialResumes: Array<Resume>,
   cv: any,
-  pdfs: Array<any>,
+  pdf_urls: Array<any>,
 }) {
   const [resumes, setResumes] = useState<Array<Resume>>([...initialResumes]);
   const [activeResume, setActiveResume] = useState<number>(0);
   const [addResumeActive, setAddResumeActive] = useState(!(initialResumes.length > 0));
 
-  const pdf = pdfs[activeResume]
+  const pdf_url = pdf_urls[activeResume]
 
   return (
     <Grid container spacing={4}>
@@ -107,7 +107,7 @@ export default function Resumes({
       </Grid>
       <Grid item xs={6}>
         {/* <iframe src={"data:application/pdf;base64," + pdf} width="100%" height="100%"/> */}
-        <iframe src={"https://resume-builder-pdfs.s3.amazonaws.com/resume.pdf"} width="100%" height="100%"/>
+        <iframe src={pdf_url} width="100%" height="100%"/>
         {/* <embed src={"data:application/pdf;base64," + pdf} type="application/pdf"/> */}
         {/* PDF File */}
       </Grid>
