@@ -106,7 +106,9 @@ export default function Resumes({
         )}
       </Grid>
       <Grid item xs={6}>
-        <iframe src={"data:application/pdf;base64," + pdf} width="100%" height="100%"/>
+        {/* <iframe src={"data:application/pdf;base64," + pdf} width="100%" height="100%"/> */}
+        <iframe src={"https://www.africau.edu/images/default/sample.pdf"} width="100%" height="100%"/>
+        {/* <embed src={"data:application/pdf;base64," + pdf} type="application/pdf"/> */}
         {/* PDF File */}
       </Grid>
     </Grid>

@@ -26,19 +26,26 @@ async function getPdfs(cv: Array<any>, resumes: Array<Resume>) {
   //   },
   //   body: event
   // });
+
   const response = await fetch(url, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    // body: JSON.stringify({event})
-    body: JSON.stringify({"cv": {}, "resume": {}})
-  });
+    body: event
+  }).then((response) => response.body);
 
   // console.log(url)
   // const response = await fetch(url)
-  console.log(response)
+  
+  const u8: Uint8Array = (await response!.getReader().read()!).value!
+  var pdf: string = Buffer.from(u8).toString('base64');
+
+  console.log(pdf)
+
+  const pdfs = [pdf]
+
+  return [pdfs]
 
 
   // const responses: Array<any> = await Promise.all(events.map((event) => {return fetch("https://hf7pjdm35v4mkzg2kgiv4blqje0ctwni.lambda-url.us-east-1.on.aws/?event=" + event)}))
