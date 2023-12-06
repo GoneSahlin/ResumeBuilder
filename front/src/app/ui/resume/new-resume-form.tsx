@@ -3,7 +3,7 @@
 import { Button, Container, Input, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
-import { Resume } from "../lib/definitions";
+import { Resume } from "@/app/lib/definitions";
 
 export type Inputs = {
   resumeName: string
@@ -13,10 +13,12 @@ export function NewResumeForm({
   resumes,
   setResumes,
   setAddResumeActive,
+  updatePdfUrls,
 }:{
-  resumes: Array<any>,
+  resumes: Array<Resume>,
   setResumes: Dispatch<SetStateAction<any[]>>,
   setAddResumeActive: Dispatch<SetStateAction<boolean>>,
+  updatePdfUrls: (resumes: Array<Resume>) => void;
 }) {
   const {
     register,
@@ -33,15 +35,19 @@ export function NewResumeForm({
       "workExperienceIds": [],
       "relatedCourseworkIds": [],
       "technicalSkillsIds": [],
-    }
-    setResumes([...resumes, newResume]);
+    };
+
+    const newResumes = [...resumes, newResume];
+    updatePdfUrls(newResumes);
+
+    setResumes(newResumes);
     setAddResumeActive(false);
   };
 
   const defaultResumeName = () => {
-    let i = resumes.length + 1
+    let i = resumes.length + 1;
     let name = "Resume " + i;
-    const resumeNames = resumes.map((resume) => {return resume.resumeName})
+    const resumeNames = resumes.map((resume) => {return resume.resumeName});
 
     while (resumeNames.includes(name)) {
       name = "Resume " + ++i

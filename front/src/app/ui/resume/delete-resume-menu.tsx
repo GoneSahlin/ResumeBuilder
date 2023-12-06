@@ -1,3 +1,4 @@
+import { Resume } from "@/app/lib/definitions";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
 
@@ -6,24 +7,33 @@ export function DeleteResumeMenu({
   setResumes,
   activeResume,
   setActiveResume,
+  pdfUrls,
+  setPdfUrls,
 }:{
-  resumes: Array<any>,
-  setResumes: Dispatch<SetStateAction<any[]>>,
+  resumes: Array<Resume>,
+  setResumes: Dispatch<SetStateAction<Resume[]>>,
   activeResume: number,
   setActiveResume: Dispatch<SetStateAction<number>>,
+  pdfUrls: Array<string>,
+  setPdfUrls: Dispatch<SetStateAction<Array<string>>>,
 }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = (resume: any) => {
+  const handleClose = (index: number) => {
     setAnchorEl(null);
-    setResumes([...resumes.filter((x) => {return x !== resume})])
-    if (resumes[activeResume] === resume) {
+
+    setResumes((resumes) => resumes.filter((_, i) => i !== index));
+    setPdfUrls((pdfUrls) => pdfUrls.filter((_, i) => i !== index));
+  
+    if (activeResume === index) {
       setActiveResume(--activeResume);
     }
   };
+
+  const indexes: Array<number> = Array.from({length: resumes.length}, (item, index) => index);
 
   return (
     <>
@@ -45,9 +55,9 @@ export function DeleteResumeMenu({
           'aria-labelledby': 'basic-button',
         }}
       >
-        {resumes.map((resume) => {
+        {indexes.map((index) => {
           return (
-            <MenuItem key={resume} onClick={() => handleClose(resume)}>{resume.resumeName}</MenuItem>
+            <MenuItem key={index} onClick={() => handleClose(index)}>{resumes[index].resumeName}</MenuItem>
           );
         })}
       </Menu>

@@ -4,39 +4,47 @@ import { useState } from "react";
 import ResumeTopBar from "./resume-top-bar"
 import { NewResumeForm } from "./new-resume-form";
 import { Resume } from "../../lib/definitions";
-import { ResumeItem } from "./resume-item";
 import { ResumeSection } from "./resume-section";
 import { Grid } from "@mui/material";
 import { BulletResumeSection } from "./bullet-resume-section";
+import { updatePdfs } from "@/app/api/update-pdfs";
 
 export default function Resumes({
   initialResumes,
   cv,
-  pdf_urls,
+  initialPdfUrls,
 } : {
   initialResumes: Array<Resume>,
   cv: any,
-  pdf_urls: Array<any>,
+  initialPdfUrls: Array<any>,
 }) {
   const [resumes, setResumes] = useState<Array<Resume>>([...initialResumes]);
   const [activeResume, setActiveResume] = useState<number>(0);
   const [addResumeActive, setAddResumeActive] = useState(!(initialResumes.length > 0));
+  const [pdfUrls, setPdfUrls] = useState<Array<string>>([...initialPdfUrls]);
 
-  const pdf_url = pdf_urls[activeResume]
+  const pdfUrl = pdfUrls[activeResume];
+
+  const updatePdfUrls = async (resumes: Array<Resume>) => {
+    setPdfUrls(await updatePdfs(cv, resumes));
+  }
 
   return (
     <Grid container spacing={4}>
       <Grid item xs={6}>
         {addResumeActive || resumes.length === 0 ? (
-          <NewResumeForm resumes={resumes} setResumes={setResumes} setAddResumeActive={setAddResumeActive} />
+          <NewResumeForm resumes={resumes} setResumes={setResumes} setAddResumeActive={setAddResumeActive} updatePdfUrls={updatePdfUrls} />
         ):(
           <div>
             <ResumeTopBar
               resumes={resumes}
               setResumes={setResumes}
+              cv={cv}
               setAddResumeActive={setAddResumeActive}
               activeResume={activeResume}
               setActiveResume={setActiveResume}
+              pdfUrls={pdfUrls}
+              setPdfUrls={setPdfUrls}
             /><br/>
             {/* Educations */}
             <ResumeSection 
@@ -106,10 +114,7 @@ export default function Resumes({
         )}
       </Grid>
       <Grid item xs={6}>
-        {/* <iframe src={"data:application/pdf;base64," + pdf} width="100%" height="100%"/> */}
-        <iframe src={pdf_url} width="100%" height="100%"/>
-        {/* <embed src={"data:application/pdf;base64," + pdf} type="application/pdf"/> */}
-        {/* PDF File */}
+        <iframe src={pdfUrl} width="100%" height="800"/>
       </Grid>
     </Grid>
   )
