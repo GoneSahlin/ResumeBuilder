@@ -2,23 +2,54 @@ import { Button, IconButton, ListItem, ListItemText } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { ResumeAction, ResumeActionKind, SectionKind } from "@/app/lib/resume-reducer";
+import { Dispatch } from "react";
+import { Resume } from "@/app/lib/definitions";
 
 
 export function ResumeItem({
+  resumeDispatch,
+  resumeIdKey,
   name,
-  upArrow,
-  downArrow,
-  moveUp,
-  moveDown,
-  remove,
+  i,
+  indexesLength,
 } : {
+  resumeDispatch: Dispatch<ResumeAction>,
+  resumeIdKey: SectionKind,
+  i: number,
+  indexesLength: number
   name: string,
-  upArrow: boolean,
-  downArrow: boolean,
-  moveUp: () => void,
-  moveDown: () => void,
-  remove: () => void,
 }) {
+  const upArrow: boolean = i > 0;
+  const downArrow: boolean = i < indexesLength - 1;
+
+  const moveUp = () => {
+    const action: ResumeAction = {
+      type: ResumeActionKind.MOVE_UP_ITEM,
+      section: resumeIdKey,
+      payload: i,
+    }
+    resumeDispatch(action);
+  }
+
+  const moveDown = () => {
+    const action: ResumeAction = {
+      type: ResumeActionKind.MOVE_UP_ITEM,
+      section: resumeIdKey,
+      payload: i + 1,
+    }
+    resumeDispatch(action);
+  }
+
+  const remove = () => {
+    const action: ResumeAction = {
+      type: ResumeActionKind.REMOVE_ITEM,
+      section: resumeIdKey,
+      payload: i,
+    }
+    resumeDispatch(action);
+  }
+
   return (
     <ListItem
       key={name}

@@ -23,6 +23,7 @@ export default function ResumeEditor({
         cvSectionKey="educations"
         cvNameKey="educationName"
         addString="Add Education"
+        bulletSection={false}
       /><br/>
       {/* Projects */}
       <ResumeSection 
@@ -33,33 +34,41 @@ export default function ResumeEditor({
         cvSectionKey="projects"
         cvNameKey="projectTitle"
         addString="Add Project"
+        bulletSection={false}
       /><br/>
       {/* Research */}
-      {/* <ResumeSection 
+      <ResumeSection 
         resume={resume}
+        resumeDispatch={resumeDispatch}
         cv={cv}
-        resumeIdKey="researchIds"
+        resumeIdKey={SectionKind.RESEARCH}
         cvSectionKey="research"
         cvNameKey="researchTitle"
         addString="Add Research"
-      /><br/> */}
+        bulletSection={false}
+      /><br/>
       {/* Work Experience */}
-      {/* <ResumeSection 
+      <ResumeSection 
         resume={resume}
+        resumeDispatch={resumeDispatch}
         cv={cv}
-        resumeIdKey="workExperienceIds"
+        resumeIdKey={SectionKind.WORK_EXPERIENCE}
         cvSectionKey="workExperience"
         cvNameKey="workExperienceEmployer"
-        addString="Add Work Experience"
-      /><br/> */}
+        addString="Add Work Experience" 
+        bulletSection={false}
+      /><br/>
       {/* Related Coursework */}
-      {/* <BulletResumeSection
+      <ResumeSection
         resume={resume}
+        resumeDispatch={resumeDispatch}
         cv={cv}
         cvSectionKey="relatedCoursework"
-        resumeIdKey="relatedCourseworkIds"
+        cvNameKey=""
+        resumeIdKey={SectionKind.RELATED_COURSEWORK}
         addString="Add Related Coursework"
-      /><br /> */}
+        bulletSection={true}
+      /><br />
       {/* Technical Skills */}
       {/* <BulletResumeSection
         resume={resume}

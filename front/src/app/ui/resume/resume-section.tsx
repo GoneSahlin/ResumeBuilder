@@ -15,6 +15,7 @@ export function ResumeSection({
   cvSectionKey,
   cvNameKey,
   addString,
+  bulletSection,
 } : {
   resume: Resume,
   resumeDispatch: Dispatch<ResumeAction>,
@@ -23,19 +24,8 @@ export function ResumeSection({
   cvSectionKey: string,
   cvNameKey: string,
   addString: string,
+  bulletSection: boolean,
 }) {
-  // make array of section ids
-  const sectionIds: Array<number> = resume[resumeIdKey as keyof Resume] as Array<number>;
-
-  const indexes: Array<number> = Array.from({length: sectionIds.length}, (item, index) => index);
-
-  const otherItems: Array<any> = cv[cvSectionKey].filter((item: any) => {
-    return !(sectionIds.includes(item.id));
-  });
-
-  const otherIds: Array<number> = otherItems.map((item: any) => {return item.id})
-  const itemStrings: Array<string> = otherItems.map((item: any) => {return item[cvNameKey]})
-
   const addItem = (id: number) => {
     const action: ResumeAction = {
       type: ResumeActionKind.ADD_ITEM,
@@ -44,40 +34,44 @@ export function ResumeSection({
     }
     resumeDispatch(action);
   }
+  
+  // make array of section ids
+  const sectionIds: Array<number> = resume[resumeIdKey as keyof Resume] as Array<number>;
 
-  const moveUp = (i: number) => {
-    const action: ResumeAction = {
-      type: ResumeActionKind.MOVE_UP_ITEM,
-      section: resumeIdKey,
-      payload: i,
-    }
-    resumeDispatch(action);
-  }
+  const indexes: Array<number> = Array.from({length: sectionIds.length}, (item, index) => index);
 
-  const remove = (i: number) => {
-    const action: ResumeAction = {
-      type: ResumeActionKind.REMOVE_ITEM,
-      section: resumeIdKey,
-      payload: i,
-    }
-    resumeDispatch(action);
+
+  // declare otherIds itemStrings, and names differently for bullet section and normal section
+  let otherIds: Array<number>;
+  let itemStrings: Array<string>;
+  let names: Array<string>;
+  if (bulletSection) {
+    // item strings for bullet section
+    otherIds = cv[cvSectionKey].map((val: string, i: number) => {return !sectionIds.includes(i) ? (i) : (null)}).filter((x: any) => {return x !== null});
+    itemStrings = otherIds.map((i: number) => {return cv[cvSectionKey][i]})
+    names = indexes.map((i) => {return cv[cvSectionKey][sectionIds[i]]})
+  } else {
+    // item strings for normal section
+    const otherItems: Array<any> = cv[cvSectionKey].filter((item: any) => {
+      return !(sectionIds.includes(item.id));
+    });
+  
+    otherIds = otherItems.map((item: any) => {return item.id})
+    itemStrings = otherItems.map((item: any) => {return item[cvNameKey]})
+    names = indexes.map((i) => {return cv[cvSectionKey].filter((item: any) => {return item.id === sectionIds[i]})[0][cvNameKey]});
   }
 
   return (
     <>
       <List>
         {indexes.map((i) => {
-          // find name
-          const name: string = cv[cvSectionKey].filter((item: any) => {return item.id === sectionIds[i]})[0][cvNameKey];
           return (
-            <ResumeItem
-              key={i}
-              name={name}
-              upArrow={i > 0}
-              downArrow={i < indexes.length - 1}
-              moveUp={() => moveUp(i)}
-              moveDown={() => moveUp(i + 1)}
-              remove={() => remove(i)}
+            <ResumeItem 
+              resumeDispatch={resumeDispatch}
+              resumeIdKey={resumeIdKey}
+              i={i}
+              indexesLength={indexes.length}
+              name={names[i]}              
             />
           );
         })}

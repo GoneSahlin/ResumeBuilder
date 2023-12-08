@@ -17,13 +17,15 @@ export function SectionAddMenu({
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const handleSelect = (id: number) => {
     addItem(id);
     setAnchorEl(null);
-  }
+  };
 
   const indexes: Array<number> = Array.from({length: ids.length}, (item, index) => index);
 

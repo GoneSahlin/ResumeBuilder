@@ -6,7 +6,6 @@ import { NewResumeForm } from "./new-resume-form";
 import { Resume } from "../../lib/definitions";
 import { ResumeSection } from "./resume-section";
 import { Grid } from "@mui/material";
-import { BulletResumeSection } from "./bullet-resume-section";
 import { updatePdfs } from "@/app/api/update-pdfs";
 import ResumeEditor from "./resume-editor";
 
