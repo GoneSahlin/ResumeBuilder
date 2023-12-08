@@ -5,27 +5,28 @@ import { ResumeItem } from "./resume-item";
 import { Dispatch, SetStateAction } from "react";
 import { SectionAddMenu } from "./section-add-menu";
 import { Resume } from "@/app/lib/definitions";
+import { ResumeAction, ResumeActionKind, SectionKind } from "@/app/lib/resume-reducer";
 
 export function ResumeSection({
-  resumes,
-  setResumes,
-  activeResume,
+  resume,
+  resumeDispatch,
   cv,
   resumeIdKey,
   cvSectionKey,
   cvNameKey,
   addString,
 } : {
-  resumes: Array<any>,
-  setResumes: Dispatch<SetStateAction<any[]>>,
-  activeResume: number,
+  resume: Resume,
+  resumeDispatch: Dispatch<ResumeAction>,
   cv: any,
-  resumeIdKey: string,
+  resumeIdKey: SectionKind,
   cvSectionKey: string,
   cvNameKey: string,
   addString: string,
 }) {
-  const sectionIds: Array<number> = resumes[activeResume][resumeIdKey];
+  // make array of section ids
+  const sectionIds: Array<number> = resume[resumeIdKey as keyof Resume] as Array<number>;
+
   const indexes: Array<number> = Array.from({length: sectionIds.length}, (item, index) => index);
 
   const otherItems: Array<any> = cv[cvSectionKey].filter((item: any) => {
@@ -36,23 +37,30 @@ export function ResumeSection({
   const itemStrings: Array<string> = otherItems.map((item: any) => {return item[cvNameKey]})
 
   const addItem = (id: number) => {
-    const newResume: any = {...resumes[activeResume]}
-    newResume[resumeIdKey] = [...newResume[resumeIdKey], id];
-    setResumes([...resumes.slice(0, activeResume), newResume, ...resumes.slice(activeResume + 1)])
+    const action: ResumeAction = {
+      type: ResumeActionKind.ADD_ITEM,
+      section: resumeIdKey,
+      payload: id,
+    }
+    resumeDispatch(action);
   }
 
   const moveUp = (i: number) => {
-    const newResume: any = {...resumes[activeResume]}
-    const tmp: number = newResume[resumeIdKey][i];
-    newResume[resumeIdKey][i] = newResume[resumeIdKey][i - 1];
-    newResume[resumeIdKey][i - 1] = tmp;
-    setResumes([...resumes.slice(0, activeResume), newResume, ...resumes.slice(activeResume + 1)])
+    const action: ResumeAction = {
+      type: ResumeActionKind.MOVE_UP_ITEM,
+      section: resumeIdKey,
+      payload: i,
+    }
+    resumeDispatch(action);
   }
 
   const remove = (i: number) => {
-    const newResume: any = {...resumes[activeResume]}
-    newResume[resumeIdKey] = [...newResume[resumeIdKey].slice(0, i), ...newResume[resumeIdKey].slice(i + 1)]
-    setResumes([...resumes.slice(0, activeResume), newResume, ...resumes.slice(activeResume + 1)])
+    const action: ResumeAction = {
+      type: ResumeActionKind.REMOVE_ITEM,
+      section: resumeIdKey,
+      payload: i,
+    }
+    resumeDispatch(action);
   }
 
   return (
