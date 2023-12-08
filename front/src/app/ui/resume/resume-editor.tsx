@@ -6,13 +6,13 @@ import { SectionKind, resumeReducer } from "@/app/lib/resume-reducer";
 export default function ResumeEditor({
   initialResume,
   cv,
-  activeResume,
 } : {
   initialResume: Resume,
   cv: any,
-  activeResume: number
 }) {
   const [resume, resumeDispatch] = useReducer(resumeReducer, initialResume);
+
+  console.log("editor", initialResume)
   
   return (
     <div>

@@ -42,13 +42,13 @@ export default function Resumes({
           setActiveResume={setActiveResume}
           pdfUrls={pdfUrls}
           setPdfUrls={setPdfUrls}
-        /><br/>
+        /><br />
       <Grid container spacing={4}>
         <Grid item xs={6}>
           {addResumeActive || resumes.length === 0 ? (
             <NewResumeForm resumes={resumes} setResumes={setResumes} setAddResumeActive={setAddResumeActive} updatePdfUrls={updatePdfUrls} />
           ):(
-            <ResumeEditor initialResume={resume} cv={cv} activeResume={activeResume}/>
+            <ResumeEditor key={activeResume} initialResume={resume} cv={cv}/>
           )}
         </Grid>
         <Grid item xs={6}>
