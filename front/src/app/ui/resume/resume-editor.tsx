@@ -6,9 +6,11 @@ import { SectionKind, resumeReducer } from "@/app/lib/resume-reducer";
 export default function ResumeEditor({
   initialResume,
   cv,
+  activeResume,
 } : {
   initialResume: Resume,
   cv: any,
+  activeResume: number
 }) {
   const [resume, resumeDispatch] = useReducer(resumeReducer, initialResume);
   
@@ -70,13 +72,16 @@ export default function ResumeEditor({
         bulletSection={true}
       /><br />
       {/* Technical Skills */}
-      {/* <BulletResumeSection
+      <ResumeSection
         resume={resume}
+        resumeDispatch={resumeDispatch}
         cv={cv}
         cvSectionKey="technicalSkills"
-        resumeIdKey="technicalSkillsIds"
+        cvNameKey=""
+        resumeIdKey={SectionKind.TECHNICAL_SKILLS}
         addString="Add Technical Skill"
-      /><br /> */}
+        bulletSection={true}
+      /><br />
     </div>
   )
 }

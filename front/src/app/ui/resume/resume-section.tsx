@@ -66,7 +66,8 @@ export function ResumeSection({
       <List>
         {indexes.map((i) => {
           return (
-            <ResumeItem 
+            <ResumeItem
+              key={i}
               resumeDispatch={resumeDispatch}
               resumeIdKey={resumeIdKey}
               i={i}

@@ -29,6 +29,8 @@ export default function Resumes({
     setPdfUrls(await updatePdfs(cv, resumes));
   }
 
+  const resume: Resume = {...resumes[activeResume]};
+
   return (
     <div>
       <ResumeTopBar
@@ -46,7 +48,7 @@ export default function Resumes({
           {addResumeActive || resumes.length === 0 ? (
             <NewResumeForm resumes={resumes} setResumes={setResumes} setAddResumeActive={setAddResumeActive} updatePdfUrls={updatePdfUrls} />
           ):(
-            <ResumeEditor initialResume={resumes[activeResume]} cv={cv}/>
+            <ResumeEditor initialResume={resume} cv={cv} activeResume={activeResume}/>
           )}
         </Grid>
         <Grid item xs={6}>
