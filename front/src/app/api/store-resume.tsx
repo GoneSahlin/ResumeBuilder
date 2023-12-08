@@ -14,6 +14,7 @@ export async function storeResume(resume: Resume) {
   const doc = {
     "_id": ObjectId.createFromHexString(resume.id),
     "userId": userId,
+    "updatedAt": Date.now(),
     ...rest,
   }
 
