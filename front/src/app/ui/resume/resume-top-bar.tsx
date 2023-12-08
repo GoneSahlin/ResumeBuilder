@@ -3,7 +3,7 @@
 import { Box, Button, ButtonGroup, Select } from "@mui/material";
 import { Dispatch, SetStateAction } from 'react';
 import { DeleteResumeMenu } from "./delete-resume-menu";
-import { storeResumes } from "@/app/api/store-resume";
+import { storeResumes } from "@/app/api/store-resumes";
 import { updatePdfs } from "@/app/api/update-pdfs";
 
 export default function ResumeTopBar({

@@ -4,6 +4,7 @@ export type Field = {
 }
 
 export type Resume = {
+    id: string;
     resumeName: string;
     educationIds: Array<number>;
     projectIds: Array<number>;

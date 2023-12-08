@@ -1,3 +1,4 @@
+import { deleteResume } from "@/app/api/delete-resume";
 import { Resume } from "@/app/lib/definitions";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -25,12 +26,11 @@ export function DeleteResumeMenu({
   const handleClose = (index: number) => {
     setAnchorEl(null);
 
-    setResumes((resumes) => resumes.filter((_, i) => i !== index));
-    setPdfUrls((pdfUrls) => pdfUrls.filter((_, i) => i !== index));
-  
-    if (activeResume === index) {
-      setActiveResume(--activeResume);
-    }
+    deleteResume(resumes[index].id);
+    
+    // if (activeResume === index) {
+    //   setActiveResume(--activeResume);
+    // }
   };
 
   const indexes: Array<number> = Array.from({length: resumes.length}, (item, index) => index);

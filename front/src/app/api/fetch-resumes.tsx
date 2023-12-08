@@ -3,6 +3,7 @@
 import { currentUser } from "@clerk/nextjs";
 import clientPromise from "./mongodb";
 import { Resume } from "../lib/definitions";
+import { ObjectId } from "mongodb";
 
 export async function fetchResumes() {
   // add userId to doc
@@ -16,16 +17,27 @@ export async function fetchResumes() {
 
   // fetch
   const filter = {"userId": userId};
-  const doc = await resumes_col.findOne(filter);
+  const docs = await resumes_col.find(filter).toArray();
 
-  if (!doc) {
+  if (!docs) {
     return [];
   }
 
-  // format resume
-  const resumes: Array<Resume> = doc.resumes.map((resume: Resume) => {
-    return resume as Resume;
-  })
+  // format resumes
+  const resumes: Array<Resume> = docs.map((doc) => {
+    const resume: Resume = {
+      id: (doc._id as ObjectId).toHexString(),
+      resumeName: doc.resumeName,
+      educationIds: doc.educationIds,
+      projectIds: doc.projectIds,
+      researchIds: doc.researchIds,
+      workExperienceIds: doc.workExperienceIds,
+      relatedCourseworkIds: doc.relatedCourseworkIds,
+      technicalSkillsIds: doc.technicalSkillsIds, 
+    };
+
+    return resume;
+  });
 
   return resumes;
 }

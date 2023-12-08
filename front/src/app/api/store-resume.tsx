@@ -3,15 +3,16 @@
 import { currentUser } from "@clerk/nextjs";
 import clientPromise from "./mongodb";
 import { Resume } from "../lib/definitions";
+import { ObjectId } from "mongodb";
 
-export async function storeResumes(resumes: Array<Resume>) {
+export async function storeResume(resume: Resume) {
   const user = await currentUser();
   const userId = user?.id;
 
   // create doc
   const doc = {
     "userId": userId,
-    "resumes": resumes,
+    ...resume,
   }
 
   // connection
@@ -20,7 +21,7 @@ export async function storeResumes(resumes: Array<Resume>) {
   const resumes_col = db.collection("resumes");
 
   // replace
-  const filter = {"userId": userId}
+  const filter = {"_id": ObjectId.createFromHexString(resume.id)}
   const options = { upsert: true };
   resumes_col.replaceOne(filter, doc, options);
 }

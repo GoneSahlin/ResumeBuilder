@@ -4,6 +4,8 @@ import { Button, Container, Input, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
 import { Resume } from "@/app/lib/definitions";
+import { ObjectId } from "mongodb";
+import { newResume } from "@/app/api/new-resume";
 
 export type Inputs = {
   resumeName: string
@@ -27,20 +29,12 @@ export function NewResumeForm({
   } = useForm<Inputs>({ shouldUnregister: true });
 
   const onSubmit = async (data: any) => {
-    const newResume: Resume = {
-      "resumeName": data.resumeName,
-      "educationIds": [],
-      "projectIds": [],
-      "researchIds": [],
-      "workExperienceIds": [],
-      "relatedCourseworkIds": [],
-      "technicalSkillsIds": [],
-    };
+    await newResume(data.resumeName);
 
-    const newResumes = [...resumes, newResume];
-    updatePdfUrls(newResumes);
+    // const newResumes = [...resumes, newResume];
+    // updatePdfUrls(newResumes);
 
-    setResumes(newResumes);
+    // setResumes(newResumes);
     setAddResumeActive(false);
   };
 
