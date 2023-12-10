@@ -1,24 +1,22 @@
 import { Resume } from "@/app/lib/definitions";
 import { ResumeSection } from "./resume-section";
-import { useReducer } from "react";
-import { SectionKind, resumeReducer } from "@/app/lib/resume-reducer";
+import { Dispatch, useReducer } from "react";
+import { ResumeAction, ResumeState, SectionKind, resumeReducer } from "@/app/lib/resume-reducer";
 
 export default function ResumeEditor({
-  initialResume,
+  resumeState,
+  resumeDispatch,
   cv,
 } : {
-  initialResume: Resume,
+  resumeState: ResumeState,
+  resumeDispatch: Dispatch<ResumeAction>,
   cv: any,
-}) {
-  const [resume, resumeDispatch] = useReducer(resumeReducer, initialResume);
-
-  console.log("editor", initialResume)
-  
+}) {  
   return (
     <div>
       {/* Educations */}
       <ResumeSection 
-        resume={resume}
+        resumeState={resumeState}
         resumeDispatch={resumeDispatch}
         cv={cv}
         resumeIdKey={SectionKind.EDUCATION}
@@ -29,7 +27,7 @@ export default function ResumeEditor({
       /><br/>
       {/* Projects */}
       <ResumeSection 
-        resume={resume}
+        resumeState={resumeState}
         resumeDispatch={resumeDispatch}
         cv={cv}
         resumeIdKey={SectionKind.PROJECTS}
@@ -40,7 +38,7 @@ export default function ResumeEditor({
       /><br/>
       {/* Research */}
       <ResumeSection 
-        resume={resume}
+        resumeState={resumeState}
         resumeDispatch={resumeDispatch}
         cv={cv}
         resumeIdKey={SectionKind.RESEARCH}
@@ -51,7 +49,7 @@ export default function ResumeEditor({
       /><br/>
       {/* Work Experience */}
       <ResumeSection 
-        resume={resume}
+        resumeState={resumeState}
         resumeDispatch={resumeDispatch}
         cv={cv}
         resumeIdKey={SectionKind.WORK_EXPERIENCE}
@@ -62,7 +60,7 @@ export default function ResumeEditor({
       /><br/>
       {/* Related Coursework */}
       <ResumeSection
-        resume={resume}
+        resumeState={resumeState}
         resumeDispatch={resumeDispatch}
         cv={cv}
         cvSectionKey="relatedCoursework"
@@ -73,7 +71,7 @@ export default function ResumeEditor({
       /><br />
       {/* Technical Skills */}
       <ResumeSection
-        resume={resume}
+        resumeState={resumeState}
         resumeDispatch={resumeDispatch}
         cv={cv}
         cvSectionKey="technicalSkills"

@@ -5,10 +5,10 @@ import { ResumeItem } from "./resume-item";
 import { Dispatch, SetStateAction } from "react";
 import { SectionAddMenu } from "./section-add-menu";
 import { Resume } from "@/app/lib/definitions";
-import { ResumeAction, ResumeActionKind, SectionKind } from "@/app/lib/resume-reducer";
+import { ResumeAction, ResumeActionKind, ResumeState, SectionKind } from "@/app/lib/resume-reducer";
 
 export function ResumeSection({
-  resume,
+  resumeState,
   resumeDispatch,
   cv,
   resumeIdKey,
@@ -17,7 +17,7 @@ export function ResumeSection({
   addString,
   bulletSection,
 } : {
-  resume: Resume,
+  resumeState: ResumeState,
   resumeDispatch: Dispatch<ResumeAction>,
   cv: any,
   resumeIdKey: SectionKind,
@@ -34,12 +34,12 @@ export function ResumeSection({
     }
     resumeDispatch(action);
   }
+  const resume = resumeState.resume;
   
   // make array of section ids
   const sectionIds: Array<number> = resume[resumeIdKey as keyof Resume] as Array<number>;
 
   const indexes: Array<number> = Array.from({length: sectionIds.length}, (item, index) => index);
-
 
   // declare otherIds itemStrings, and names differently for bullet section and normal section
   let otherIds: Array<number>;

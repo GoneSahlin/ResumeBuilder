@@ -21,24 +21,32 @@ export interface ResumeAction {
   payload: number; // index or id, depending on type
 }
 
-export function resumeReducer(resume: Resume, action: ResumeAction) {
+export interface ResumeState {
+  resume: Resume;
+  modified: boolean;
+}
+
+export function resumeReducer(state: ResumeState, action: ResumeAction) {
+  const resume: Resume = state.resume;
+
+  var newResume: Resume;
+
   switch (action.type) {
     case ResumeActionKind.ADD_ITEM: {
-      // payload as id
       const id: number = action.payload;
 
       // create new resume
-      const newResume: Resume = {...resume};
-      newResume[action.section] = [...resume[action.section], id];
+      newResume = {...resume};
+      newResume[action.section] = [...newResume[action.section], id];
 
-      return newResume;
+      break;
     }
     case ResumeActionKind.MOVE_UP_ITEM: {
       // payload as index
       const i: number = action.payload;
 
       // create new resume
-      const newResume: Resume = {...resume};
+      newResume = {...resume};
       
       // create copy of section so that reducer is a pure function
       newResume[action.section] = [...resume[action.section]]
@@ -48,24 +56,33 @@ export function resumeReducer(resume: Resume, action: ResumeAction) {
       newResume[action.section][i] = newResume[action.section][i - 1];
       newResume[action.section][i - 1] = tmp;
 
-      return newResume as Resume;
+      break;
     }
     case ResumeActionKind.REMOVE_ITEM: {
       // payload as index
       const i: number = action.payload;
 
       // create new resume
-      const newResume: Resume = {...resume};
+      newResume = {...resume};
       
       // craete copy of section so that reducer is a pure function
-      newResume[action.section] = [...resume[action.section]]
+      newResume[action.section] = [...resume[action.section]];
 
       // remove item
       newResume[action.section].splice(i, 1);
 
-      return newResume;
+      break;
     }
+    default:
+      throw Error('Unknown action: ' + action.type);
   }
-  throw Error('Unknown action: ' + action.type);
-}
 
+  const newState: ResumeState = {
+    resume: {...newResume},
+    modified: true,
+  }
+
+  console.log(newResume);
+
+  return newState;
+}

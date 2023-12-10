@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import ResumeTopBar from "./resume-top-bar"
 import { NewResumeForm } from "./new-resume-form";
 import { Resume } from "../../lib/definitions";
-import { ResumeSection } from "./resume-section";
 import { Grid } from "@mui/material";
 import { updatePdfs } from "@/app/api/update-pdfs";
 import ResumeEditor from "./resume-editor";
+import { ResumeState, resumeReducer } from "@/app/lib/resume-reducer";
 
 export default function Resumes({
   initialResumes,
@@ -23,13 +23,21 @@ export default function Resumes({
   const [addResumeActive, setAddResumeActive] = useState(!(initialResumes.length > 0));
   const [pdfUrls, setPdfUrls] = useState<Array<string>>([...initialPdfUrls]);
 
+  const [resumeState, resumeDispatch] = useReducer(
+    resumeReducer, 
+    {
+      resume: 
+      {
+        ...resumes[activeResume]
+      }, 
+      modified: false
+    } as ResumeState);
+
   const pdfUrl = pdfUrls[activeResume];
 
   const updatePdfUrls = async (resumes: Array<Resume>) => {
     setPdfUrls(await updatePdfs(cv, resumes));
   }
-
-  const resume: Resume = {...resumes[activeResume]};
 
   return (
     <div>
@@ -48,11 +56,11 @@ export default function Resumes({
           {addResumeActive || resumes.length === 0 ? (
             <NewResumeForm resumes={resumes} setResumes={setResumes} setAddResumeActive={setAddResumeActive} updatePdfUrls={updatePdfUrls} />
           ):(
-            <ResumeEditor key={activeResume} initialResume={resume} cv={cv}/>
+            <ResumeEditor resumeState={resumeState} resumeDispatch={resumeDispatch} cv={cv} />
           )}
         </Grid>
         <Grid item xs={6}>
-          <iframe src={pdfUrl} width="100%" height="800"/>
+          <iframe src={pdfUrl} width="100%" height="800" />
         </Grid>
       </Grid>
     </div>
