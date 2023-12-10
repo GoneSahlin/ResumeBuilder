@@ -1,10 +1,13 @@
 'use client';
  
-import { Box, Button, ButtonGroup, Select } from "@mui/material";
-import { Dispatch, SetStateAction } from 'react';
+import { Box, Button, ButtonGroup, Dialog, Select } from "@mui/material";
+import { Dispatch, SetStateAction, useState } from 'react';
 import { DeleteResumeMenu } from "./delete-resume-menu";
 import { storeResumes } from "@/app/api/store-resumes";
 import { updatePdfs } from "@/app/api/update-pdfs";
+import { ResumeAction, ResumeState } from "@/app/lib/resume-reducer";
+import { storeResume } from "@/app/api/store-resume";
+import SaveDialog from "./save-dialog";
 
 export default function ResumeTopBar({
   resumes,
@@ -15,6 +18,8 @@ export default function ResumeTopBar({
   setActiveResume,
   pdfUrls,
   setPdfUrls,
+  resumeState,
+  resumeDispatch,
 }:{
   resumes: Array<any>,
   setResumes: Dispatch<SetStateAction<any[]>>,
@@ -24,14 +29,27 @@ export default function ResumeTopBar({
   setActiveResume: Dispatch<SetStateAction<number>>,
   pdfUrls: Array<string>,
   setPdfUrls: Dispatch<SetStateAction<Array<string>>>,
+  resumeState: ResumeState,
+  resumeDispatch: Dispatch<ResumeAction>,
 }) {
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const checkUnsavedResume = () => {
+    if (resumeState.modified) {
+      setOpenDialog(true);
+    }
+  }
+
   const handleResumeButton = (i: number) => {
+    checkUnsavedResume();
     setActiveResume(i);
   }
 
   const handleSaveClick = async () => {
-    setPdfUrls(await updatePdfs(cv, resumes));
-    storeResumes(resumes);
+    if (resumeState.modified) {
+      await storeResume(resumeState.resume);
+    }
+    // setPdfUrls(await updatePdfs(cv, resumes));
   }
 
   const indexes: Array<number> = Array.from({length: resumes.length}, (item, index) => index);
@@ -63,6 +81,10 @@ export default function ResumeTopBar({
         setPdfUrls={setPdfUrls}
       />
       <Button variant="contained" type="button" onClick={handleSaveClick}>Save</Button>
+      <SaveDialog 
+        open={openDialog}
+        onClose={() => {}}
+      />
     </Box>
   )
 }

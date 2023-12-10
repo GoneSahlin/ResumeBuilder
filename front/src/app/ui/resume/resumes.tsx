@@ -50,6 +50,8 @@ export default function Resumes({
           setActiveResume={setActiveResume}
           pdfUrls={pdfUrls}
           setPdfUrls={setPdfUrls}
+          resumeState={resumeState}
+          resumeDispatch={resumeDispatch}
         /><br />
       <Grid container spacing={4}>
         <Grid item xs={6}>
