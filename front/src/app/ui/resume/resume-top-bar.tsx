@@ -52,6 +52,16 @@ export default function ResumeTopBar({
     // setPdfUrls(await updatePdfs(cv, resumes));
   }
 
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  }
+
+  const handleSaveDialog = async () => {
+    await handleSaveClick();
+    setOpenDialog(false);
+  }
+
   const indexes: Array<number> = Array.from({length: resumes.length}, (item, index) => index);
 
   return (
@@ -83,7 +93,8 @@ export default function ResumeTopBar({
       <Button variant="contained" type="button" onClick={handleSaveClick}>Save</Button>
       <SaveDialog 
         open={openDialog}
-        onClose={() => {}}
+        onSave={handleSaveDialog}
+        onClose={handleCloseDialog}
       />
     </Box>
   )
