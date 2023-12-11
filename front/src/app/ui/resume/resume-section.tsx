@@ -34,7 +34,7 @@ export function ResumeSection({
     }
     resumeDispatch(action);
   }
-  const resume = resumeState.resume;
+  const resume: Resume = resumeState.resumes[resumeState.activeResume];
   
   // make array of section ids
   const sectionIds: Array<number> = resume[resumeIdKey as keyof Resume] as Array<number>;

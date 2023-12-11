@@ -9,31 +9,27 @@ import { updatePdfs } from "@/app/api/update-pdfs";
 import ResumeEditor from "./resume-editor";
 import { ResumeState, resumeReducer } from "@/app/lib/resume-reducer";
 
-export default function Resumes({
-  initialResumes,
-  cv,
-  initialPdfUrls,
-} : {
-  initialResumes: Array<Resume>,
-  cv: any,
-  initialPdfUrls: Array<any>,
-}) {
-  const [resumes, setResumes] = useState<Array<Resume>>([...initialResumes]);
-  const [activeResume, setActiveResume] = useState<number>(0);
+export interface ResumeProps {
+  initialResumes: Array<Resume>;
+  cv: any;
+  initialPdfUrls: Array<any>;
+}
+
+export default function Resumes(props: ResumeProps) {
+  const { initialResumes, cv, initialPdfUrls } = props;
+
   const [addResumeActive, setAddResumeActive] = useState(!(initialResumes.length > 0));
   const [pdfUrls, setPdfUrls] = useState<Array<string>>([...initialPdfUrls]);
 
-  const [resumeState, resumeDispatch] = useReducer(
-    resumeReducer, 
-    {
-      resume: 
-      {
-        ...resumes[activeResume]
-      }, 
-      modified: false
-    } as ResumeState);
+  const initialState: ResumeState = {
+    resumes: [...initialResumes],
+    modified: Array.from({length: initialResumes.length}, () => false),
+    activeResume: 0,
+  }
+  const [resumeState, resumeDispatch] = useReducer(resumeReducer, initialState);
 
-  const pdfUrl = pdfUrls[activeResume];
+  const pdfUrl = pdfUrls[resumeState.activeResume];
+  const resumes: Array<Resume> = resumeState.resumes;
 
   const updatePdfUrls = async (resumes: Array<Resume>) => {
     setPdfUrls(await updatePdfs(cv, resumes));
@@ -42,12 +38,8 @@ export default function Resumes({
   return (
     <div>
       <ResumeTopBar
-          resumes={resumes}
-          setResumes={setResumes}
           cv={cv}
           setAddResumeActive={setAddResumeActive}
-          activeResume={activeResume}
-          setActiveResume={setActiveResume}
           pdfUrls={pdfUrls}
           setPdfUrls={setPdfUrls}
           resumeState={resumeState}
@@ -56,7 +48,7 @@ export default function Resumes({
       <Grid container spacing={4}>
         <Grid item xs={6}>
           {addResumeActive || resumes.length === 0 ? (
-            <NewResumeForm resumes={resumes} setResumes={setResumes} setAddResumeActive={setAddResumeActive} updatePdfUrls={updatePdfUrls} />
+            <NewResumeForm resumeState={resumeState} resumeDispatch={resumeDispatch} setAddResumeActive={setAddResumeActive} updatePdfUrls={updatePdfUrls} />
           ):(
             <ResumeEditor resumeState={resumeState} resumeDispatch={resumeDispatch} cv={cv} />
           )}

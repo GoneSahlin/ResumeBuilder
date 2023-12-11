@@ -1,28 +1,28 @@
 import { deleteResume } from "@/app/api/delete-resume";
 import { Resume } from "@/app/lib/definitions";
+import { ResumeAction, ResumeState } from "@/app/lib/resume-reducer";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
 
-export function DeleteResumeMenu({
-  resumes,
-  setResumes,
-  activeResume,
-  setActiveResume,
-  pdfUrls,
-  setPdfUrls,
-}:{
-  resumes: Array<Resume>,
-  setResumes: Dispatch<SetStateAction<Resume[]>>,
-  activeResume: number,
-  setActiveResume: Dispatch<SetStateAction<number>>,
-  pdfUrls: Array<string>,
-  setPdfUrls: Dispatch<SetStateAction<Array<string>>>,
-}) {
+export interface DeleteResumeMenuProps {
+  resumeState: ResumeState;
+  resumeDispatch: Dispatch<ResumeAction>;
+  pdfUrls: Array<string>;
+  setPdfUrls: Dispatch<SetStateAction<Array<string>>>;
+}
+
+export function DeleteResumeMenu(props: DeleteResumeMenuProps) {
+  const { resumeState, resumeDispatch, pdfUrls, setPdfUrls } = props;
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
   const open = Boolean(anchorEl);
+  const resumes: Array<Resume> = resumeState.resumes; 
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = (index: number) => {
     setAnchorEl(null);
 

@@ -5,50 +5,53 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { DeleteResumeMenu } from "./delete-resume-menu";
 import { storeResumes } from "@/app/api/store-resumes";
 import { updatePdfs } from "@/app/api/update-pdfs";
-import { ResumeAction, ResumeState } from "@/app/lib/resume-reducer";
+import { ResumeAction, ResumeActionKind, ResumeState } from "@/app/lib/resume-reducer";
 import { storeResume } from "@/app/api/store-resume";
 import SaveDialog from "./save-dialog";
+import { Resume } from "@/app/lib/definitions";
 
-export default function ResumeTopBar({
-  resumes,
-  setResumes,
-  cv,
-  setAddResumeActive,
-  activeResume,
-  setActiveResume,
-  pdfUrls,
-  setPdfUrls,
-  resumeState,
-  resumeDispatch,
-}:{
-  resumes: Array<any>,
-  setResumes: Dispatch<SetStateAction<any[]>>,
-  cv: any
-  setAddResumeActive: Dispatch<SetStateAction<boolean>>,
-  activeResume: number,
-  setActiveResume: Dispatch<SetStateAction<number>>,
-  pdfUrls: Array<string>,
-  setPdfUrls: Dispatch<SetStateAction<Array<string>>>,
-  resumeState: ResumeState,
-  resumeDispatch: Dispatch<ResumeAction>,
-}) {
+export interface ResumeTopBarProps {
+  cv: any;
+  setAddResumeActive: Dispatch<SetStateAction<boolean>>;
+  pdfUrls: Array<string>;
+  setPdfUrls: Dispatch<SetStateAction<Array<string>>>;
+  resumeState: ResumeState;
+  resumeDispatch: Dispatch<ResumeAction>;
+}
+
+export default function ResumeTopBar(props: ResumeTopBarProps) {
+  const { cv, setAddResumeActive, pdfUrls, setPdfUrls, resumeState, resumeDispatch } = props;
+
   const [openDialog, setOpenDialog] = useState(false);
 
+  const resumes: Array<Resume> = resumeState.resumes;
+
   const checkUnsavedResume = () => {
-    if (resumeState.modified) {
+    if (resumeState.modified[resumeState.activeResume]) {
       setOpenDialog(true);
     }
   }
 
   const handleResumeButton = (i: number) => {
     checkUnsavedResume();
-    setActiveResume(i);
+    
+    const action: ResumeAction = {
+      type: ResumeActionKind.SET_ACTIVE_RESUME,
+      section: null,
+      payload: i,
+    };
+    resumeDispatch(action);
   }
 
   const handleSaveClick = async () => {
-    if (resumeState.modified) {
-      await storeResume(resumeState.resume);
+    await storeResumes(resumeState.resumes, resumeState.modified);
+
+    const action: ResumeAction = {
+      type: ResumeActionKind.SET_NOT_MODIFIED_ALL,
+      section: null,
+      payload: 0,
     }
+    resumeDispatch(action);
     // setPdfUrls(await updatePdfs(cv, resumes));
   }
 
@@ -73,7 +76,7 @@ export default function ResumeTopBar({
               <Button 
                 key={resumes[i].resumeName}
                 onClick={() => handleResumeButton(i)}
-                variant={i === activeResume ? "contained" : "outlined"}
+                variant={i === resumeState.activeResume ? "contained" : "outlined"}
               >
                 {resumes[i].resumeName}
               </Button>
@@ -83,10 +86,8 @@ export default function ResumeTopBar({
       </ButtonGroup>
       <Button type="button" onClick={() => setAddResumeActive(true)}>Add</Button>
       <DeleteResumeMenu
-        resumes={resumes}
-        setResumes={setResumes}
-        activeResume={activeResume}
-        setActiveResume={setActiveResume}
+        resumeState={resumeState}
+        resumeDispatch={resumeDispatch}
         pdfUrls={pdfUrls}
         setPdfUrls={setPdfUrls}
       />

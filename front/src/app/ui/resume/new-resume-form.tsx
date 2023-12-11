@@ -6,27 +6,29 @@ import { Dispatch, SetStateAction } from "react";
 import { Resume } from "@/app/lib/definitions";
 import { ObjectId } from "mongodb";
 import { newResume } from "@/app/api/new-resume";
+import { ResumeAction, ResumeState } from "@/app/lib/resume-reducer";
 
 export type Inputs = {
   resumeName: string
 };
 
-export function NewResumeForm({
-  resumes,
-  setResumes,
-  setAddResumeActive,
-  updatePdfUrls,
-}:{
-  resumes: Array<Resume>,
-  setResumes: Dispatch<SetStateAction<any[]>>,
-  setAddResumeActive: Dispatch<SetStateAction<boolean>>,
+export interface NewResumeFormProps {
+  resumeState: ResumeState;
+  resumeDispatch: Dispatch<ResumeAction>;
+  setAddResumeActive: Dispatch<SetStateAction<boolean>>;
   updatePdfUrls: (resumes: Array<Resume>) => void;
-}) {
+}
+
+export function NewResumeForm(props: NewResumeFormProps) {
+  const { resumeState, resumeDispatch, setAddResumeActive, updatePdfUrls } = props;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ shouldUnregister: true });
+
+  const resumes: Array<Resume> = resumeState.resumes;
 
   const onSubmit = async (data: any) => {
     await newResume(data.resumeName);
