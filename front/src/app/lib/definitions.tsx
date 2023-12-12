@@ -13,3 +13,10 @@ export type Resume = {
     relatedCourseworkIds: Array<number>;
     technicalSkillsIds: Array<number>; 
 }
+
+export interface PdfData {
+    pdfUrl: string;
+    resumeId: string;
+    resumeUpdatedAt: number;
+    updatedAt: number;
+}

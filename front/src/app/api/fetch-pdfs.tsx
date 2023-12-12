@@ -2,6 +2,7 @@
 
 import { currentUser } from "@clerk/nextjs";
 import clientPromise from "./mongodb";
+import { PdfData } from "../lib/definitions";
 
 export async function fetchPdfs() {
   // add userId to doc
@@ -15,16 +16,14 @@ export async function fetchPdfs() {
 
   // fetch
   const filter = {"userId": userId};
-  const doc = await pdf_urls_col.findOne(filter);
+  const docs = await pdf_urls_col.find(filter).toArray();
 
-  if (!doc) {
+  if (!docs) {
     return [];
   }
 
   // format pdf_url
-  const pdf_urls: Array<string> = doc.pdf_urls.map((pdf_url: string) => {
-    return pdf_url as string;
-  })
+  const pdfs: Array<PdfData> = docs.map((doc) => {return doc as PdfData});
 
-  return pdf_urls;
+  return pdfs;
 }
