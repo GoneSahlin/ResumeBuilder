@@ -3,7 +3,7 @@
 import { useReducer, useState } from "react";
 import ResumeTopBar from "./resume-top-bar"
 import { NewResumeForm } from "./new-resume-form";
-import { Resume } from "../../lib/definitions";
+import { PdfData, Resume } from "../../lib/definitions";
 import { Grid } from "@mui/material";
 import { updatePdfs } from "@/app/api/update-pdfs";
 import ResumeEditor from "./resume-editor";
@@ -13,10 +13,11 @@ export interface ResumeProps {
   initialResumes: Array<Resume>;
   cv: any;
   initialPdfUrls: Array<any>;
+  initialPdfs: Array<PdfData>;
 }
 
 export default function Resumes(props: ResumeProps) {
-  const { initialResumes, cv, initialPdfUrls } = props;
+  const { initialResumes, cv, initialPdfUrls, initialPdfs } = props;
 
   const [addResumeActive, setAddResumeActive] = useState(!(initialResumes.length > 0));
   const [pdfUrls, setPdfUrls] = useState<Array<string>>([...initialPdfUrls]);
@@ -25,6 +26,7 @@ export default function Resumes(props: ResumeProps) {
     resumes: [...initialResumes],
     modified: Array.from({length: initialResumes.length}, () => false),
     activeResume: 0,
+    pdfs: initialPdfs,
   }
   const [resumeState, resumeDispatch] = useReducer(resumeReducer, initialState);
 

@@ -9,6 +9,7 @@ import { ResumeAction, ResumeActionKind, ResumeState } from "@/app/lib/resume-re
 import { storeResume } from "@/app/api/store-resume";
 import SaveDialog from "./save-dialog";
 import { Resume } from "@/app/lib/definitions";
+import { fetchAll } from "@/app/api/fetch-all";
 
 export interface ResumeTopBarProps {
   cv: any;
@@ -45,6 +46,8 @@ export default function ResumeTopBar(props: ResumeTopBarProps) {
 
   const handleSaveClick = async () => {
     await storeResumes(resumeState.resumes, resumeState.modified);
+
+    // const {resumes, cv, pdfs} = await fetchAll();
 
     const action: ResumeAction = {
       type: ResumeActionKind.SET_NOT_MODIFIED_ALL,

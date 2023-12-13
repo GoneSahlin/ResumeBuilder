@@ -1,4 +1,4 @@
-import { Resume } from "./definitions";
+import { PdfData, Resume } from "./definitions";
 
 export enum ResumeActionKind {
   ADD_ITEM = 'ADD_ITEM',
@@ -28,6 +28,7 @@ export interface ResumeState {
   resumes: Array<Resume>;
   modified: Array<boolean>;
   activeResume: number;
+  pdfs: Array<PdfData>;
 }
 
 export function resumeReducer(state: ResumeState, action: ResumeAction) {
@@ -52,7 +53,8 @@ export function resumeReducer(state: ResumeState, action: ResumeAction) {
       return {
         resumes: newResumes,
         modified: [...newModified],
-        activeResume: state.activeResume
+        activeResume: state.activeResume,
+        pdfs: state.pdfs,
       }
     }
     case ResumeActionKind.MOVE_UP_ITEM: {
@@ -81,7 +83,8 @@ export function resumeReducer(state: ResumeState, action: ResumeAction) {
       return {
         resumes: newResumes,
         modified: [...newModified],
-        activeResume: state.activeResume
+        activeResume: state.activeResume,
+        pdfs: state.pdfs,
       }
     }
     case ResumeActionKind.REMOVE_ITEM: {
@@ -108,7 +111,8 @@ export function resumeReducer(state: ResumeState, action: ResumeAction) {
       return {
         resumes: newResumes,
         modified: [...newModified],
-        activeResume: state.activeResume
+        activeResume: state.activeResume,
+        pdfs: state.pdfs,
       }
     }
     case ResumeActionKind.SET_ACTIVE_RESUME: {
@@ -118,7 +122,8 @@ export function resumeReducer(state: ResumeState, action: ResumeAction) {
       return {
         resumes: state.resumes,
         modified: state.modified,
-        activeResume: i
+        activeResume: i,
+        pdfs: state.pdfs,
       }
     }
     case ResumeActionKind.SET_NOT_MODIFIED_ONE: {
@@ -132,6 +137,7 @@ export function resumeReducer(state: ResumeState, action: ResumeAction) {
         resumes: state.resumes,
         modified: newModified,
         activeResume: state.activeResume,
+        pdfs: state.pdfs,
       }
     }
     case ResumeActionKind.SET_NOT_MODIFIED_ALL: {
@@ -144,6 +150,7 @@ export function resumeReducer(state: ResumeState, action: ResumeAction) {
         resumes: state.resumes,
         modified: newModified,
         activeResume: state.activeResume,
+        pdfs: state.pdfs,
       }
     }
     default:
