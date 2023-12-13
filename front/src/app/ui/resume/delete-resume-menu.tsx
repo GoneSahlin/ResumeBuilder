@@ -7,12 +7,10 @@ import { Dispatch, SetStateAction, useState } from "react";
 export interface DeleteResumeMenuProps {
   resumeState: ResumeState;
   resumeDispatch: Dispatch<ResumeAction>;
-  pdfUrls: Array<string>;
-  setPdfUrls: Dispatch<SetStateAction<Array<string>>>;
 }
 
 export function DeleteResumeMenu(props: DeleteResumeMenuProps) {
-  const { resumeState, resumeDispatch, pdfUrls, setPdfUrls } = props;
+  const { resumeState, resumeDispatch } = props;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 

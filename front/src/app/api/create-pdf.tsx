@@ -5,6 +5,7 @@ import { storePdfData } from "./store-pdf";
 
 
 export async function createPdf(cv: Array<any>, resume: Resume) {
+  console.log("Creating pdf for " + resume.resumeName)
   const event = {
       "cv": cv,
       "resume": resume

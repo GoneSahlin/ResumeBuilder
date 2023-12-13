@@ -16,11 +16,10 @@ export interface NewResumeFormProps {
   resumeState: ResumeState;
   resumeDispatch: Dispatch<ResumeAction>;
   setAddResumeActive: Dispatch<SetStateAction<boolean>>;
-  updatePdfUrls: (resumes: Array<Resume>) => void;
 }
 
 export function NewResumeForm(props: NewResumeFormProps) {
-  const { resumeState, resumeDispatch, setAddResumeActive, updatePdfUrls } = props;
+  const { resumeState, resumeDispatch, setAddResumeActive } = props;
 
   const {
     register,

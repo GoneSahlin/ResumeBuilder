@@ -14,14 +14,12 @@ import { fetchAll } from "@/app/api/fetch-all";
 export interface ResumeTopBarProps {
   cv: any;
   setAddResumeActive: Dispatch<SetStateAction<boolean>>;
-  pdfUrls: Array<string>;
-  setPdfUrls: Dispatch<SetStateAction<Array<string>>>;
   resumeState: ResumeState;
   resumeDispatch: Dispatch<ResumeAction>;
 }
 
 export default function ResumeTopBar(props: ResumeTopBarProps) {
-  const { cv, setAddResumeActive, pdfUrls, setPdfUrls, resumeState, resumeDispatch } = props;
+  const { cv, setAddResumeActive, resumeState, resumeDispatch } = props;
 
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -96,8 +94,6 @@ export default function ResumeTopBar(props: ResumeTopBarProps) {
       <DeleteResumeMenu
         resumeState={resumeState}
         resumeDispatch={resumeDispatch}
-        pdfUrls={pdfUrls}
-        setPdfUrls={setPdfUrls}
       />
       <Button variant="contained" type="button" onClick={handleSaveClick}>Save</Button>
       <SaveDialog 
