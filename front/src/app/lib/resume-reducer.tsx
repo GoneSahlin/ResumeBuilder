@@ -7,6 +7,7 @@ export enum ResumeActionKind {
   SET_ACTIVE_RESUME = 'SET_ACTIVE_RESUME',
   SET_NOT_MODIFIED_ONE = 'SET_NOT_MODIFIED_ONE',
   SET_NOT_MODIFIED_ALL = 'SET_NOT_MODIFIED_ALL',
+  SET_ALL = 'SET_ALL',
 }
 
 export enum SectionKind {
@@ -21,7 +22,7 @@ export enum SectionKind {
 export interface ResumeAction {
   type: ResumeActionKind;
   section: SectionKind | null;
-  payload: number; // index or id, depending on type
+  payload: any; // index or id, depending on type
 }
 
 export interface ResumeState {
@@ -151,6 +152,19 @@ export function resumeReducer(state: ResumeState, action: ResumeAction) {
         modified: newModified,
         activeResume: state.activeResume,
         pdfs: state.pdfs,
+      }
+    }
+    case ResumeActionKind.SET_ALL: {
+      // payload as object {newResumes: Array<Resume>, newPdfs: Array<PdfData>}
+      const newResumes: Array<Resume> = action.payload.newResumes;
+      const newPdfs: Array<PdfData> = action.payload.newPdfs;
+      const newModified: Array<boolean> = Array.from({length: state.resumes.length}, () => {return false});
+
+      return {
+        resumes: newResumes,
+        modified: newModified,
+        activeResume: state.activeResume,
+        pdfs: newPdfs,
       }
     }
     default:

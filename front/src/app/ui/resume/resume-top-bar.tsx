@@ -47,12 +47,17 @@ export default function ResumeTopBar(props: ResumeTopBarProps) {
   const handleSaveClick = async () => {
     await storeResumes(resumeState.resumes, resumeState.modified);
 
-    // const {resumes, cv, pdfs} = await fetchAll();
+    const {resumes, cv, pdfs} = await fetchAll();
+
+    const payload: any = {
+      newResumes: resumes,
+      newPdfs: pdfs,
+    }
 
     const action: ResumeAction = {
-      type: ResumeActionKind.SET_NOT_MODIFIED_ALL,
+      type: ResumeActionKind.SET_ALL,
       section: null,
-      payload: 0,
+      payload: payload,
     }
     resumeDispatch(action);
     // setPdfUrls(await updatePdfs(cv, resumes));
