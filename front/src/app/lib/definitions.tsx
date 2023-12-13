@@ -11,7 +11,8 @@ export type Resume = {
     researchIds: Array<number>;
     workExperienceIds: Array<number>;
     relatedCourseworkIds: Array<number>;
-    technicalSkillsIds: Array<number>; 
+    technicalSkillsIds: Array<number>;
+    updatedAt: number;
 }
 
 export interface PdfData {

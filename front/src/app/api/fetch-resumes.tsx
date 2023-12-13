@@ -33,7 +33,8 @@ export async function fetchResumes() {
       researchIds: doc.researchIds,
       workExperienceIds: doc.workExperienceIds,
       relatedCourseworkIds: doc.relatedCourseworkIds,
-      technicalSkillsIds: doc.technicalSkillsIds, 
+      technicalSkillsIds: doc.technicalSkillsIds,
+      updatedAt: doc.updatedAt,
     };
 
     return resume;

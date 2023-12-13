@@ -1,6 +1,7 @@
 "use server";
 
-import { Resume } from "../lib/definitions";
+import { PdfData, Resume } from "../lib/definitions";
+import { storePdfData } from "./store-pdf";
 
 
 export async function createPdf(cv: Array<any>, resume: Resume) {
@@ -9,9 +10,9 @@ export async function createPdf(cv: Array<any>, resume: Resume) {
       "resume": resume
   };
 
-  const url = "https://y4kkggibb3.execute-api.us-east-1.amazonaws.com/resume-builder-create-pdf"
+  const url: string = "https://y4kkggibb3.execute-api.us-east-1.amazonaws.com/resume-builder-create-pdf"
 
-  const pdfUrl = fetch(url, {
+  const pdfUrl: string = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -19,5 +20,14 @@ export async function createPdf(cv: Array<any>, resume: Resume) {
     body: JSON.stringify(event)
   }).then((response) => response.text());
 
-  return pdfUrl;
+  const pdf: PdfData = {
+    pdfUrl: pdfUrl,
+    resumeId: resume.id,
+    resumeUpdatedAt: resume.updatedAt,
+    updatedAt: Date.now(),
+  }
+
+  storePdfData(pdf);
+
+  return pdf;
 }

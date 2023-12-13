@@ -23,7 +23,7 @@ export async function storePdfData(pdfData: PdfData) {
   const resumes_col = db.collection("pdf_urls");
 
   // replace
-  const filter = {"userId": userId}
+  const filter = {"userId": userId, "resumeId": pdfData.resumeId}
   const options = { upsert: true };
   resumes_col.replaceOne(filter, doc, options);
 }
