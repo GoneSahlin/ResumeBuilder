@@ -28,8 +28,12 @@ export default function Resumes(props: ResumeProps) {
   }
   const [resumeState, resumeDispatch] = useReducer(resumeReducer, initialState);
 
-  const pdfUrl = resumeState.pdfs[resumeState.activeResume].pdfUrl;
+  // const pdfUrl = resumeState.pdfs[resumeState.activeResume].pdfUrl;
+
   const resumes: Array<Resume> = resumeState.resumes;
+
+  // get pdfUrl corresponding to resume
+  const pdfUrl = resumeState.pdfs.find((pdf) => (pdf.resumeId === resumes[resumeState.activeResume].id))?.pdfUrl;
 
   return (
     <div>

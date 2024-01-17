@@ -22,10 +22,17 @@ export async function fetchPdfs() {
     return [];
   }
 
-  return [] as Array<PdfData>;
-
   // format pdf_url
-  // const pdfs: Array<PdfData> = docs.map((doc) => {return doc as PdfData});
+  const pdfs: Array<PdfData> = docs.map((doc) => {
+    const pdf: PdfData = {
+      pdfUrl: doc.pdfUrl,
+      resumeId: doc.resumeId,
+      resumeUpdatedAt: doc.resumeUpdatedAt,
+      updatedAt: doc.updatedAt,
+    }
 
-  // return pdfs;
+    return pdf;
+  });
+
+  return pdfs;
 }
