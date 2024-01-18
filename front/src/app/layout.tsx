@@ -11,13 +11,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import ArticleSharpIcon from '@mui/icons-material/ArticleSharp';
 import HomeIcon from '@mui/icons-material/Home';
-import StarIcon from '@mui/icons-material/Star';
-import ChecklistIcon from '@mui/icons-material/Checklist';
-import SettingsIcon from '@mui/icons-material/Settings';
-import SupportIcon from '@mui/icons-material/Support';
-import LogoutIcon from '@mui/icons-material/Logout';
 import ArticleIcon from '@mui/icons-material/Article';
 import { Description } from '@mui/icons-material';
 import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
@@ -51,9 +46,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ThemeRegistry>
             <AppBar position="fixed" sx={{ zIndex: 2000 }}>
               <Toolbar sx={{ backgroundColor: 'background.paper' }}>
-                <DashboardIcon sx={{ color: '#444', mr: 2, transform: 'translateY(-2px)' }} />
+                <ArticleSharpIcon sx={{ color: '#444', mr: 2, transform: 'translateY(-2px)' }} />
                 <Typography variant="h6" color="text.primary">
-                  Next.js App Router
+                  Resume Builder
                 </Typography>
               </Toolbar>
             </AppBar>
