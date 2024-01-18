@@ -26,7 +26,7 @@ export default function SaveDialog(props: SaveDialogProps) {
         {"Do you want to save changes?"}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Don't Save</Button>
+        <Button onClick={handleClose}>Don&apos;t Save</Button>
         <Button onClick={handleSave}>Save</Button>
       </DialogActions>
     </Dialog>     
