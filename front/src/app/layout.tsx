@@ -37,11 +37,11 @@ const LINKS = [
   { text: 'Resume', href: '/resume', icon: ArticleIcon}
 ];
 
-const PLACEHOLDER_LINKS = [
-  { text: 'Settings', icon: SettingsIcon },
-  { text: 'Support', icon: SupportIcon },
-  { text: 'Logout', icon: LogoutIcon },
-];
+// const PLACEHOLDER_LINKS = [
+//   { text: 'Settings', icon: SettingsIcon },
+//   { text: 'Support', icon: SupportIcon },
+//   { text: 'Logout', icon: LogoutIcon },
+// ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -90,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <ListItem>
                   <UserButton />
                 </ListItem>
-                {PLACEHOLDER_LINKS.map(({ text, icon: Icon }) => (
+                {/* {PLACEHOLDER_LINKS.map(({ text, icon: Icon }) => (
                   <ListItem key={text} disablePadding>
                     <ListItemButton>
                       <ListItemIcon>
@@ -99,7 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       <ListItemText primary={text} />
                     </ListItemButton>
                   </ListItem>
-                ))}
+                ))} */}
               </List>
             </Drawer>
             <Box
