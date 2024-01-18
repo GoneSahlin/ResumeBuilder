@@ -16,6 +16,7 @@ export async function newResume(resumeName: string) {
     "workExperienceIds": [],
     "relatedCourseworkIds": [],
     "technicalSkillsIds": [],
+    "updatedAt": Date.now(),
   };
   
   storeResume(newResume);

@@ -10,7 +10,7 @@ export async function storeResume(resume: Resume) {
   const userId = user?.id;
 
   // create doc
-  const {id, ...rest} = resume;
+  const {id, updatedAt, ...rest} = resume;
   const doc = {
     "_id": ObjectId.createFromHexString(resume.id),
     "userId": userId,
