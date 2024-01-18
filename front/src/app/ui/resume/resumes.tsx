@@ -5,7 +5,6 @@ import ResumeTopBar from "./resume-top-bar"
 import { NewResumeForm } from "./new-resume-form";
 import { PdfData, Resume } from "../../lib/definitions";
 import { Grid } from "@mui/material";
-import { updatePdfs } from "@/app/api/update-pdfs";
 import ResumeEditor from "./resume-editor";
 import { ResumeState, resumeReducer } from "@/app/lib/resume-reducer";
 

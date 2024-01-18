@@ -4,7 +4,6 @@ import { Box, Button, ButtonGroup, Dialog, Select } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from 'react';
 import { DeleteResumeMenu } from "./delete-resume-menu";
 import { storeResumes } from "@/app/api/store-resumes";
-import { updatePdfs } from "@/app/api/update-pdfs";
 import { ResumeAction, ResumeActionKind, ResumeState } from "@/app/lib/resume-reducer";
 import { storeResume } from "@/app/api/store-resume";
 import SaveDialog from "./save-dialog";
